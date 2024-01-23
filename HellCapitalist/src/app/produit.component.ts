@@ -10,5 +10,7 @@ import { Produit } from '../class/Produit'
   styleUrl: './produit.component.css'
 })
 export class ProduitComponent {
-    @Input() prod = new Produit(0, "", 0);
+    @Input() prod = new Produit(0, "", 0, 0, "");
+
+    valeur = "billion"
   }

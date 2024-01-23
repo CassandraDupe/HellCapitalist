@@ -1,0 +1,16 @@
+li {
+    display: block;
+    border-color: black; border-style: solid;
+}
+
+img {
+    width: 100%;
+}
+
+.tdIMG {
+    width: 18%
+}
+
+td{
+    border-color: black; border-style: solid;
+}
