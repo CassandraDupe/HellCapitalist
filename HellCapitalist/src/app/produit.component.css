@@ -1,16 +1,17 @@
-li {
+table {
     display: block;
     border-color: black; border-style: solid;
 }
 
 img {
-    width: 100%;
+    width: 100%; border-radius: 50%;
 }
 
 .tdIMG {
-    width: 18%
+    width: 25%
 }
 
 td{
-    border-color: black; border-style: solid;
+    font-size: 1.2vw;
+    text-align: center;
 }

@@ -1,40 +1,57 @@
-<main class="main">
-  <table style="width: 100%; height: 100%;">
+<table style="width: 100%; height: 100%;">
+  <tbody>
     <tr>
-      <td id="menu" style="width: 17%; height: 100%; border-color: black; border-style: solid;">
+      <td id="menu">
         <li class="satan">
           <img class="satan" alt="connecté" src="../assets/satan.png"/>
         </li>
         <div>
-          <li class="optionsMenu">
+          <!--<li class="optionsMenu">
             Achievements
+          </li>-->
+          <li class="optionsMenu">
+            <button name="mult" class="buttonMenu" (click)="openPage(1)">Upgrades</button>
           </li>
           <li class="optionsMenu">
-            Upgrades
+            <button name="mult" class="buttonMenu" (click)="openPage(2)">Managers</button>
           </li>
           <li class="optionsMenu">
-            Managers
-          </li>
-          <li class="optionsMenu">
-            Investors
+            <button name="mult" class="buttonMenu" (click)="openPage(3)">Investors</button>
           </li>
         </div>
       </td>
       <td id="jeu" style="height: 100%; border-color: black; border-style: solid;">
         <table style="width: 100%;">
-          <tr>
-            <td >$100.000</td>
-            <td>x10</td>
-          </tr>
+          <tbody>
+            <tr>
+              <td id="argent">$100.000</td>
+              <td id="multiplicateur">
+                <button name="mult" (click)="onClick()">{{ mults.at(i) }}</button>
+              </td>
+            </tr>
+          </tbody>
         </table>
-        <ul>
+        <div>
           @for (prod of produits; track prod._id) {
             <produit [prod]="prod"/>
           }
-        </ul>
+        </div>
       </td>
     </tr>
-  </table>
-</main>
+  </tbody>
+</table>
 
-<router-outlet />
+<div class="pages" [style]="'display:'+display1">
+  <button name="close1" (click)="closePage()">X</button>
+  Upgrades !!!
+</div>
+
+<div class="pages" [style]="'display:'+display2">
+  <button name="close2" (click)="closePage()">X</button>
+  Managers !!!
+</div>
+
+<div class="pages" [style]="'display:'+display3">
+  <button name="close3" (click)="closePage()">X</button>
+  Investors !!!
+</div>
