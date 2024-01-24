@@ -10,5 +10,5 @@ import { Manager } from '../class/Manager';
   styleUrl: './manager.component.css'
 })
 export class ManagerComponent {
-    @Input() man = new Manager(0, "", 0, "");
+    @Input() man: any;
   }

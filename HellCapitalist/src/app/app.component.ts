@@ -2,7 +2,8 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ProduitComponent } from './produit.component';
 import { ManagerComponent } from './manager.component';
-import { WorldService } from '../car/WorldService';
+import { WebService } from '../car/webservice.service';
+import { World, Product, Pallier } from '../class/World';
 
 @Component({
     selector: 'app-root',
@@ -12,6 +13,8 @@ import { WorldService } from '../car/WorldService';
     imports: [RouterOutlet, ProduitComponent, ManagerComponent]
 })
 export class AppComponent {
+  title = "HellCapitalist"
+  
   display = 0;
 
   openPage(opt:number) {
@@ -33,7 +36,7 @@ export class AppComponent {
     }
   }
 
-  produits;
+  /*produits;
   managers;
 
   worldService = inject(WorldService);
@@ -41,5 +44,15 @@ export class AppComponent {
   constructor() {
     this.produits = this.worldService.getProduits()
     this.managers = this.worldService.getManagers()
+  }*/
+
+  world: World = new World();
+
+  constructor(private service: WebService) {
+    service.getWorld().then(
+      world => {
+        this.world = world.data.getWorld;
+      }
+    );
   }
 }

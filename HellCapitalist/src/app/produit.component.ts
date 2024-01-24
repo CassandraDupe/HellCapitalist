@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Produit } from '../class/Produit'
+import { Product } from '../class/World';
 
 @Component({
   selector: 'produit',
@@ -10,7 +10,7 @@ import { Produit } from '../class/Produit'
   styleUrl: './produit.component.css'
 })
 export class ProduitComponent {
-    @Input() prod = new Produit(0, "", 0, 0, "");
+    @Input() prod = new Product;
 
     valeur = "billion"
   }

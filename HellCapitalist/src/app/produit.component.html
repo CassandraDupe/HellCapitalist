@@ -2,7 +2,7 @@
     <tbody>
     <tr>
         <td class="tdIMG" rowspan="2">
-            <img [src]="prod._imgURL" [alt]="prod._nom"/>
+            <img [src]="prod.logo" [alt]="prod.name"/>
         </td>
         <td colspan="3">
             8 billion/sec
@@ -13,7 +13,7 @@
             Buy
         </td>
         <td>
-            {{ prod._prix*10 }}
+            {{ prod.cout }}
         </td>
         <td rowspan="2">
             6s
@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td>
-            {{ prod._quantite }}/100
+            {{ prod.quantite }}/100
         </td>
         <td>
             x10

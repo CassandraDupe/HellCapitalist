@@ -6,17 +6,17 @@
           <img class="satan" alt="connecté" src="../assets/satan.png"/>
         </li>
         <div>
-          <!--<li class="optionsMenu">
-            Achievements
-          </li>-->
           <li class="optionsMenu">
-            <button name="up" class="buttonMenu" (click)="openPage(1)">Upgrades</button>
+            <button name="up" class="buttonMenu" (click)="openPage(1)">Unlocks</button>
           </li>
           <li class="optionsMenu">
-            <button name="man" class="buttonMenu" (click)="openPage(2)">Managers</button>
+            <button name="up" class="buttonMenu" (click)="openPage(2)">Upgrades</button>
           </li>
           <li class="optionsMenu">
-            <button name="inv" class="buttonMenu" (click)="openPage(3)">Investors</button>
+            <button name="man" class="buttonMenu" (click)="openPage(3)">Managers</button>
+          </li>
+          <li class="optionsMenu">
+            <button name="inv" class="buttonMenu" (click)="openPage(4)">Investors</button>
           </li>
         </div>
       </td>
@@ -32,7 +32,7 @@
           </tbody>
         </table>
         <div>
-          @for (prod of produits; track prod._id) {
+          @for (prod of world.products; track prod.id) {
             <produit [prod]="prod"/>
           }
         </div>
@@ -45,19 +45,23 @@
   <div id="pages">
     <button name="close" (click)="closePage()">X</button>
     @if (display == 1) {
-      Upgrades !!!
+      <h2>Unlocks</h2>
+      <p>Want to maximize profits? Look no further! Get your investment</p>
     }
     @if (display == 2) {
+      Upgrades !!!
+    }
+    @if (display == 3) {
       <h2>Managers</h2>
       <h5>Managers make life easier !</h5>
       <p>Hire to run your business for you, or to maximize efficiency, all for just one easy payment! SOULS !!!</p>
       <div>
-        @for (man of managers; track man._id) {
+        @for (man of world.managers; track man.idcible) {
           <manager [man]="man"/>
         }
       </div>
     }
-    @if (display == 3) {
+    @if (display == 4) {
       Investors !!!
     }
   </div>

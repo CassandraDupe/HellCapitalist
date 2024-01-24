@@ -50,11 +50,12 @@ img.satan {
 }
 
 #pages {
-    width: 74%; height: 90%;
-    position: absolute; left: 13%; bottom:0%;
+    overflow:scroll;
+    width: 74%; height: 90vh;
+    position: absolute; left: 13%; bottom:0vh;
     background-color: brown;
 }
 
 #pages>div {
-    background-color: blue;
+    
 }

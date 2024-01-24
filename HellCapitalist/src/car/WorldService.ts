@@ -15,7 +15,8 @@ export class WorldService {
     new Produit(6, "Maths Lessons", 100, 0, "../assets/maths_lessons.png")]
 
   managers = [
-    new Manager(1, "MrLava", 2, "../assets/lava.png")]
+    new Manager(1, "Mr Lava", 2, "../assets/lava.png"),
+    new Manager(2, "Mr Dog Toys", 5, "../assets/dog_toys.png")]
 
   getProduits() {
     return this.produits;
