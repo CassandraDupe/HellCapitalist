@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Produit } from '../class/Produit'
+import { Produit } from '../class/Produit';
+import { Manager } from '../class/Manager';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProduitService {
+export class WorldService {
   produits = [
     new Produit(1, "Lava", 2, 56, "../assets/lava.png"),
     new Produit(2, "Dog Toys", 5, 25, "../assets/dog_toys.png"),
@@ -13,7 +14,14 @@ export class ProduitService {
     new Produit(5, "Torture Machines", 50, 0, "../assets/torture_machine.png"),
     new Produit(6, "Maths Lessons", 100, 0, "../assets/maths_lessons.png")]
 
+  managers = [
+    new Manager(1, "MrLava", 2, "../assets/lava.png")]
+
   getProduits() {
     return this.produits;
+  }
+
+  getManagers() {
+    return this.managers;
   }
 }

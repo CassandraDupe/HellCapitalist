@@ -1,44 +1,25 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ProduitComponent } from './produit.component';
-import { ProduitService } from '../car/ProduitService';
+import { ManagerComponent } from './manager.component';
+import { WorldService } from '../car/WorldService';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, ProduitComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    imports: [RouterOutlet, ProduitComponent, ManagerComponent]
 })
 export class AppComponent {
-  title = 'Hell Capitalist';
-
-  display1 = 'none';
-  display2 = 'none';
-  display3 = 'none';
+  display = 0;
 
   openPage(opt:number) {
-    if(opt == 1){
-      this.display1 = 'block';
-      this.display2 = 'none';
-      this.display3 = 'none';
-    }
-    if(opt == 2){
-      this.display1 = 'none';
-      this.display2 = 'block';
-      this.display3 = 'none';
-    }
-    if(opt == 3){
-      this.display1 = 'none';
-      this.display2 = 'none';
-      this.display3 = 'block';
-    }
+    this.display = opt;
   }
 
   closePage() {
-    this.display1 = 'none';
-    this.display2 = 'none';
-    this.display3 = 'none';
+    this.display = 0;
   }
 
   i=0;
@@ -53,11 +34,12 @@ export class AppComponent {
   }
 
   produits;
+  managers;
 
-  produitService = inject(ProduitService);
+  worldService = inject(WorldService);
 
   constructor() {
-    this.produits = this.produitService
-       .getProduits()
+    this.produits = this.worldService.getProduits()
+    this.managers = this.worldService.getManagers()
   }
 }

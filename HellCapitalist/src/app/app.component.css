@@ -44,14 +44,17 @@ img.satan {
 }
 
 #jeu div {
-    list-style-type: none;
     columns: 2;
     -webkit-columns: 2;
     -moz-columns: 2;
 }
 
-.pages {
+#pages {
     width: 74%; height: 90%;
     position: absolute; left: 13%; bottom:0%;
     background-color: brown;
+}
+
+#pages>div {
+    background-color: blue;
 }

@@ -10,13 +10,13 @@
             Achievements
           </li>-->
           <li class="optionsMenu">
-            <button name="mult" class="buttonMenu" (click)="openPage(1)">Upgrades</button>
+            <button name="up" class="buttonMenu" (click)="openPage(1)">Upgrades</button>
           </li>
           <li class="optionsMenu">
-            <button name="mult" class="buttonMenu" (click)="openPage(2)">Managers</button>
+            <button name="man" class="buttonMenu" (click)="openPage(2)">Managers</button>
           </li>
           <li class="optionsMenu">
-            <button name="mult" class="buttonMenu" (click)="openPage(3)">Investors</button>
+            <button name="inv" class="buttonMenu" (click)="openPage(3)">Investors</button>
           </li>
         </div>
       </td>
@@ -41,17 +41,24 @@
   </tbody>
 </table>
 
-<div class="pages" [style]="'display:'+display1">
-  <button name="close1" (click)="closePage()">X</button>
-  Upgrades !!!
-</div>
-
-<div class="pages" [style]="'display:'+display2">
-  <button name="close2" (click)="closePage()">X</button>
-  Managers !!!
-</div>
-
-<div class="pages" [style]="'display:'+display3">
-  <button name="close3" (click)="closePage()">X</button>
-  Investors !!!
-</div>
+@if (display != 0) {
+  <div id="pages">
+    <button name="close" (click)="closePage()">X</button>
+    @if (display == 1) {
+      Upgrades !!!
+    }
+    @if (display == 2) {
+      <h2>Managers</h2>
+      <h5>Managers make life easier !</h5>
+      <p>Hire to run your business for you, or to maximize efficiency, all for just one easy payment! SOULS !!!</p>
+      <div>
+        @for (man of managers; track man._id) {
+          <manager [man]="man"/>
+        }
+      </div>
+    }
+    @if (display == 3) {
+      Investors !!!
+    }
+  </div>
+}
