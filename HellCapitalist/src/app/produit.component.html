@@ -1,34 +1,34 @@
-<li>
-    <table>
-        <tr>
-            <td class="tdIMG" rowspan="2">
-                <img [src]="prod._imgURL" [alt]="prod._nom"/>
-            </td>
-            <td colspan="3">
-                8 billion/sec
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Buy
-            </td>
-            <td>
-                {{ prod._prix*10 }}
-            </td>
-            <td rowspan="2">
-                6s
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ prod._quantite }}/100
-            </td>
-            <td>
-                x10
-            </td>
-            <td>
-                {{ valeur }}
-            </td>
-        </tr>
-    </table>
-</li>
+<table>
+    <tbody>
+    <tr>
+        <td class="tdIMG" rowspan="2">
+            <img [src]="prod._imgURL" [alt]="prod._nom"/>
+        </td>
+        <td colspan="3">
+            8 billion/sec
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Buy
+        </td>
+        <td>
+            {{ prod._prix*10 }}
+        </td>
+        <td rowspan="2">
+            6s
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {{ prod._quantite }}/100
+        </td>
+        <td>
+            x10
+        </td>
+        <td>
+            {{ valeur }}
+        </td>
+    </tr>
+</tbody>
+</table>
