@@ -46,6 +46,7 @@ export class AppComponent {
     this.managers = this.worldService.getManagers()
   }*/
 
+  api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/graphql';
   world: World = new World();
 
   constructor(private service: WebService) {

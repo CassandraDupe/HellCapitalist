@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Manager } from '../class/Manager';
+import { Pallier } from '../class/World';
 
 @Component({
   selector: 'manager',
@@ -10,5 +10,5 @@ import { Manager } from '../class/Manager';
   styleUrl: './manager.component.css'
 })
 export class ManagerComponent {
-    @Input() man: any;
+    @Input() man = new Pallier;
   }
