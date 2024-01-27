@@ -26,14 +26,14 @@
             <tr>
               <td id="argent">$100.000</td>
               <td id="multiplicateur">
-                <button name="mult" (click)="onClick()">{{ mults.at(i) }}</button>
+                <button name="mult" (click)="onClick()">{{ mult }}</button>
               </td>
             </tr>
           </tbody>
         </table>
         <div>
           @for (prod of world.products; track prod.id) {
-            <produit [prod]="prod"/>
+            <produit [params]="{prod:prod, mult:mult, money:world.money}"/>
           }
         </div>
       </td>

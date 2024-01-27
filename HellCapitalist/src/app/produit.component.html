@@ -2,10 +2,10 @@
     <tbody>
     <tr>
         <td class="tdIMG" rowspan="2">
-            <img [src]="prod.logo" [alt]="prod.name"/>
+            <img [src]="product.logo" [alt]="product.name"/>
         </td>
         <td colspan="3">
-            8 billion/sec
+            {{ (product.revenu * product.quantite) / (product.vitesse / 1000) }} $/s
         </td>
     </tr>
     <tr>
@@ -13,18 +13,18 @@
             Buy
         </td>
         <td>
-            {{ prod.cout }}
+            {{ product.cout }}
         </td>
         <td rowspan="2">
-            6s
+            {{ product.vitesse / 1000 }} s
         </td>
     </tr>
     <tr>
         <td>
-            {{ prod.quantite }}/100
+            {{ product.quantite }}/{{ seu }}
         </td>
         <td>
-            x10
+            {{ achat }}
         </td>
         <td>
             {{ valeur }}
