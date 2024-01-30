@@ -39,6 +39,8 @@ module.exports = {
                     "unlocked": "false"
                 },
             ],
+        },
+        {
             "id": 2,
             "name": "Dog toys",
             "logo": "../Public/Icones/dog_toys.jpg",
@@ -68,9 +70,9 @@ module.exports = {
                     "typeratio": "gain",
                     "unlocked": "false"
                 }
-                ]
+            ]
         }
-        ],
+    ],
     "allunlocks": [
         {
             "name": "Nom du premier unlock général",
