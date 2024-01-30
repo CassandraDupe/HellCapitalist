@@ -16,6 +16,11 @@ img.satan {
     width: 100%;
 }
 
+#user-name {
+    position: absolute;
+    bottom: 0%;
+}
+
 #menu div {
     display: flex;
     flex-direction: column;

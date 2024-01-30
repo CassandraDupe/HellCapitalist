@@ -2,7 +2,7 @@
     <tbody>
     <tr>
         <td class="tdIMG" rowspan="2">
-            <img [src]="product.logo" [alt]="product.name"/>
+            <img [src]="api + product.logo" [alt]="product.name"/>
         </td>
         <td colspan="3">
             {{ (product.revenu * product.quantite) / (product.vitesse / 1000) }} $/s
@@ -13,7 +13,7 @@
             Buy
         </td>
         <td>
-            {{ product.cout }}
+            {{ cout }}
         </td>
         <td rowspan="2">
             {{ product.vitesse / 1000 }} s

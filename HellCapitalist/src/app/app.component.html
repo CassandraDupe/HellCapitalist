@@ -3,7 +3,15 @@
     <tr>
       <td id="menu">
         <li class="satan">
-          <img class="satan" alt="connecté" src="../assets/satan.png"/>
+          @if(connecte == null) {
+            <img class="satan" alt="non connecté" src="../assets/satan_blank.png"/>
+            <input type="text" id="user-name"/>
+            <input type="submit" id="submit"/>
+          } @else if(!connecte){
+            <img class="satan" alt="non connecté" src="../assets/satan_blank.png" (click)="connection()"/>
+          } @else if(connecte) {
+            <img class="satan" alt="connecté" src="../assets/satan.png"/>
+          }
         </li>
         <div>
           <li class="optionsMenu">

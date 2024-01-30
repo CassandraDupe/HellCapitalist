@@ -38,6 +38,12 @@ export class AppComponent {
     this.mult = this.mults.at(this.i)!;
   }
 
+  connecte: boolean | null = false;
+
+  connection() {
+    this.connecte = null;
+  }
+
   api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/graphql';
   world: World = new World();
 
