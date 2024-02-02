@@ -1,9 +1,12 @@
+const fs = require("fs").promises;
 async function readUserWorld(user) {
     try {
         const data = await fs.readFile("userworlds/"+ user + "-world.json");
         return JSON.parse(data);
     }
     catch(error) {
+        console.log(error);
+        //console.dir(world);
         return world
     }
 }
@@ -17,6 +20,7 @@ const typeDefs = require("./src/schema.js")
 const resolvers = require("./src/resolvers.js")
 //Ajout du monde
 let world = require("./src/world.js")
+//console.dir(world)
 
 const server = new ApolloServer({
     typeDefs, resolvers,
