@@ -588,7 +588,7 @@ export class AppComponent {
       {
         "name": "Wangari Maathai",
         "logo": "icones/WangariMaathai.jpg",
-        "seuil": 10,
+        "seuil": 10.02,
         "idcible": 1,
         "ratio": 0,
         "typeratio": "gain",

@@ -10,7 +10,17 @@ import { Pallier } from '../class/World';
   styleUrl: './manager.component.css'
 })
 export class ManagerComponent {
-    @Input() man = new Pallier;
-    
-    api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/';
+  api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/';
+  man = new Pallier;
+  affCout = "";
+
+  @Input()
+  set manager(value: Pallier) {
+    this.man = value;
+    this.affCout = ""+this.man.seuil;
+    let lenCout = this.affCout.length;
+    let affCouts = this.affCout.split('').reverse().join();//.match(/.{1,3}/g || []);
+    console.log
+    this.affCout = affCouts;
   }
+}
