@@ -1,17 +1,33 @@
 table {
     display: block;
-    border-color: black; border-style: solid;
+    width: 84%;
+    position: relative; left: 8%;
 }
 
 .manIMG img {
-    width: 25%; border-radius: 50%;
+    width: 100%; border-radius: 50%;
 }
 
-/*.manIMG {
+.manIMG {
     width: 25%;
-}*/
+}
 
 td{
-    font-size: 1.2vw;
     text-align: center;
+    border-color: black; border-style: solid;
+}
+
+.manName {
+    font-size: 3vw;
+}
+
+.manRun {
+    font-size: 1.1vw;
+}
+
+.manCout {
+    font-size: 2.5vw;
+}
+.manHire {
+    
 }
