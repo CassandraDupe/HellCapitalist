@@ -11,4 +11,6 @@ import { Pallier } from '../class/World';
 })
 export class ManagerComponent {
     @Input() man = new Pallier;
+    
+    api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/';
   }

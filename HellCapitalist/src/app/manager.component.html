@@ -2,22 +2,22 @@
     <tbody>
         <tr>
             <td class="manIMG" rowspan="3">
-                <img [src]="man.logo" [alt]="man.name"/>
+                <img [src]="api + man.logo" [alt]="man.name"/>
             </td>
-            <td>
+            <td class="manName">
                 {{ man.name }}
             </td>
-            <td>
-                <button name="hire">HIRE</button>
+            <td rowspan="3">
+                <button name="hire" class="manHire">HIRE</button>
             </td>
         </tr>
         <tr>
-            <td>
+            <td class="manRun">
                 Runs {{ man.idcible }}
             </td>
         </tr>
         <tr>
-            <td>
+            <td class="manCout">
                 {{ man.seuil }}
             </td>
         </tr>
