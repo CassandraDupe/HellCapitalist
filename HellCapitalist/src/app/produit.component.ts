@@ -19,12 +19,13 @@ export class ProduitComponent {
   cout = -1;
   affCout!: string | undefined;
 
-  api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/';
+  api = '';
 
   Illions = ["","","Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion", "Trigintillion", "Quadragintillion", "Quinquagintillion", "Sexagintillion", "Septuagintillion", "Octogintillion", "Nonagintillion", "Centillion", "Ducentillion", "Trucentillion", "Quadringentillion", "Quingentillion", "Sescentillion", "Septingentillion", "Octingentillion", "Nongentillion"]
 
   @Input()
   set params(value: any) {
+    this.api = value.api!;
     this.product = value.prod!;
     this.seu = this.product.palliers.find(elem => elem.unlocked == false)?.seuil;
     this.multiplicateur = value.mult!;
@@ -45,6 +46,7 @@ export class ProduitComponent {
     }
     this.cout = Math.floor(this.product.cout*((1-Math.pow(this.product.croissance,this.achat))/(1-this.product.croissance)));
     this.affCout = ""+this.cout;
+    this.valeur = "";
     if(this.cout>=1000000){
       let truc = Math.floor(Math.log(this.cout) / Math.log(1000));
       this.valeur = this.Illions[truc];

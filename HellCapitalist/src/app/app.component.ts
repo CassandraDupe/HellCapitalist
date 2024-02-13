@@ -41,10 +41,15 @@ export class AppComponent {
   connecte: boolean | null = false;
 
   connection() {
-    this.connecte = null;
+    if(this.connecte == false){
+      this.connecte = null;
+    } else if (this.connecte == null){
+      this.connecte = true;
+    }
   }
 
-  api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/graphql';
+  //api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/graphql';
+  api = '';
   world: World = new World();
 
   affMoney: string | undefined;
@@ -62,6 +67,7 @@ export class AppComponent {
     this.world = this.getWorldOffLine();
 
     this.affMoney = ""+this.world.money;
+    this.valeur = "";
     if(this.world.money>=1000000){
       let truc = Math.floor(Math.log(this.world.money) / Math.log(1000));
       this.valeur = this.Illions[truc];
@@ -71,7 +77,7 @@ export class AppComponent {
 
   getWorldOffLine () {
     return {"name": "A Nice World 2",
-    "logo": "icones/ecolo.jpg",
+    "logo": "../assets/satan.png",
     "money": 1000000000,
     "score": 2,
     "totalangels": 0,
@@ -81,8 +87,8 @@ export class AppComponent {
     "products": [
       {
         "id": 1,
-        "name": "Paper Bags",
-        "logo": "icones/sacpapier.jpg",
+        "name": "Lava",
+        "logo": "../assets/lava.png",
         "cout": 4,
         "croissance": 1.07,
         "revenu": 1,
@@ -131,8 +137,8 @@ export class AppComponent {
       },
       {
         "id": 2,
-        "name": "Recycle Bins",
-        "logo": "icones/recyclage.jpg",
+        "name": "Dog Toys",
+        "logo": "../assets/dog_toys.png",
         "cout": 60,
         "croissance": 1.15,
         "revenu": 60,
@@ -181,8 +187,8 @@ export class AppComponent {
       },
       {
         "id": 3,
-        "name": "Bicycles",
-        "logo": "icones/velo.jpg",
+        "name": "Screams and Despair",
+        "logo": "../assets/scream_and_despair.png",
         "cout": 720,
         "croissance": 1.14,
         "revenu": 540,
@@ -231,8 +237,8 @@ export class AppComponent {
       },
       {
         "id": 4,
-        "name": "Electrical Cars",
-        "logo": "icones/voitureelec.jpg",
+        "name": "Flesh and Bones",
+        "logo": "../assets/flesh_and_bone.png",
         "cout": 8640,
         "croissance": 1.13,
         "revenu": 4320,
@@ -281,8 +287,8 @@ export class AppComponent {
       },
       {
         "id": 5,
-        "name": "Wind Turbines",
-        "logo": "icones/eolienne.jpg",
+        "name": "Torture Machine",
+        "logo": "../assets/torture_machine.png",
         "cout": 103680,
         "croissance": 1.12,
         "revenu": 51840,
@@ -331,8 +337,8 @@ export class AppComponent {
       },
       {
         "id": 6,
-        "name": "Solar Energy",
-        "logo": "icones/solar.jpg",
+        "name": "Maths Lessons",
+        "logo": "../assets/maths_lessons.png",
         "cout": 1244160,
         "croissance": 1.11,
         "revenu": 622080,
@@ -586,8 +592,8 @@ export class AppComponent {
     ],
     "managers": [
       {
-        "name": "Wangari Maathai",
-        "logo": "icones/WangariMaathai.jpg",
+        "name": "Freddy Krueger",
+        "logo": "../assets/Freddy_Krueger.png",
         "seuil": 10.02,
         "idcible": 1,
         "ratio": 0,
@@ -595,8 +601,8 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "Ellen MacArthur",
-        "logo": "icones/ellenmacarthur.jpg",
+        "name": "Shô Tucker",
+        "logo": "../assets/Shô_Tucker.png",
         "seuil": 15000,
         "idcible": 2,
         "ratio": 0,
@@ -604,8 +610,8 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "Pierre Rabhi",
-        "logo": "icones/pierreRabhi.jpg",
+        "name": "Pinhead",
+        "logo": "../assets/Pinhead.png",
         "seuil": 100000,
         "idcible": 3,
         "ratio": 0,
@@ -613,8 +619,8 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "Nicolas Hulot",
-        "logo": "icones/hulot.jpg",
+        "name": "Hannibal Lecter",
+        "logo": "../assets/Hannibal_Lecter.png",
         "seuil": 500000,
         "idcible": 4,
         "ratio": 0,
@@ -622,8 +628,8 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "Jean-Yves Cousteau",
-        "logo": "icones/cousteau.jpg",
+        "name": "John Kramer",
+        "logo": "../assets/John_Kramer.png",
         "seuil": 1200000,
         "idcible": 5,
         "ratio": 0,
@@ -631,8 +637,8 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "Shiva Vandana",
-        "logo": "icones/shivavandana.jpg",
+        "name": "Gwenael Araignie",
+        "logo": "../assets/Gwenael_Araignie.png",
         "seuil": 10000000,
         "idcible": 6,
         "ratio": 0,

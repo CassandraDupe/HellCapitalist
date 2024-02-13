@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Pallier } from '../class/World';
+import { reverse } from 'node:dns';
 
 @Component({
   selector: 'manager',
@@ -10,17 +11,13 @@ import { Pallier } from '../class/World';
   styleUrl: './manager.component.css'
 })
 export class ManagerComponent {
-  api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/';
+  api = '';
   man = new Pallier;
   affCout = "";
 
   @Input()
-  set manager(value: Pallier) {
-    this.man = value;
-    this.affCout = ""+this.man.seuil;
-    let lenCout = this.affCout.length;
-    let affCouts = this.affCout.split('').reverse().join();//.match(/.{1,3}/g || []);
-    console.log
-    this.affCout = affCouts;
+  set params(value: any) {
+    this.api = value.api;
+    this.man = value.manager;
   }
 }

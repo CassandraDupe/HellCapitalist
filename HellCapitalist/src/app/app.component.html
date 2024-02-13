@@ -1,14 +1,13 @@
-<table style="width: 100%; height: 100%;">
+<table id="APP">
   <tbody>
     <tr>
       <td id="menu">
         <li class="satan">
           @if(connecte == null) {
             <img class="satan" alt="non connecté" src="../assets/satan_blank.png"/>
-            <input type="text" id="user-name"/>
-            <input type="submit" id="submit"/>
+            <input type="text" id="user-name"/><input type="submit" id="submit" value="➤" (click)="connection()"/>
           } @else if(!connecte){
-            <img class="satan" alt="non connecté" src="../assets/satan_blank.png" (click)="connection()"/>
+            <img class="satan clickSatan" alt="non connecté" src="../assets/satan_blank.png" (click)="connection()"/>
           } @else if(connecte) {
             <img class="satan" alt="connecté" src="../assets/satan.png"/>
           }
@@ -28,11 +27,16 @@
           </li>
         </div>
       </td>
-      <td id="jeu" style="height: 100%; border-color: black; border-style: solid;">
+      <td id="jeu">
         <table style="width: 100%;">
           <tbody>
             <tr>
-              <td id="argent">{{ "$ " + affMoney + " " + valeur }}</td>
+              <td id="argent">
+                {{ "$ " + affMoney}}
+                <span>
+                  {{ valeur }}
+                </span>
+              </td>
               <td id="multiplicateur">
                 <button name="mult" (click)="onClick()">{{ mult }}</button>
               </td>
@@ -41,7 +45,7 @@
         </table>
         <div>
           @for (prod of world.products; track prod.id) {
-            <produit [params]="{prod:prod, mult:mult, money:world.money}"/>
+            <produit [params]="{api:api ,prod:prod, mult:mult, money:world.money}"/>
           }
         </div>
       </td>
@@ -65,7 +69,7 @@
       <p>Hire to run your business for you, or to maximize efficiency, all for just one easy payment! SOULS !!!</p>
       <div>
         @for (man of world.managers; track man.idcible) {
-          <manager [manager]="man"/>
+          <manager [params]="{api:api ,manager:man}"/>
         }
       </div>
     }

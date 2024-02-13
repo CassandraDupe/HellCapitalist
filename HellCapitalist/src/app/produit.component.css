@@ -1,17 +1,74 @@
 table {
-    display: block;
-    border-color: black; border-style: solid;
+    width: 100%; height: 100%;
 }
 
-img {
-    width: 100%; border-radius: 50%;
-}
-
-.tdIMG {
-    width: 25%
+tbody {
+    width: 100%; height: 100%;
 }
 
 td{
     font-size: 1.2vw;
     text-align: center;
+}
+
+.tdIMG {
+    width: 23%
+}
+
+.tdIMG img {
+    width: 100%;
+    border-radius: 50%; border-color: rgb(62, 54, 48); border-style: solid;
+}
+
+.tdIMG div {
+    position:relative ; bottom: 10%;
+    background-color: rgb(62, 54, 48);
+    border-radius:10vh; border-color: rgb(62, 54, 48); border-style: solid;
+    color: white;
+}
+
+.vitesse {
+    background-color: rgb(100, 181, 63);
+    border-style: solid; border-color: rgb(62, 54, 48);
+    border-top-right-radius: 10vh; border-bottom-right-radius: 10vh;
+}
+
+.ligneBas {
+    height: 60%;
+}
+
+.tabOrange {
+    background-color: rgb(253, 128, 66);
+    border-radius: 1vw; border-style: solid; border-color: rgb(62, 54, 48);
+}
+
+.textOrange {
+    color: white;  -webkit-text-stroke: 1px #000000;
+    font-size: 2vw;
+}
+
+.textOrangeGauche {
+    text-align: left;
+}
+
+.textOrangeDroite {
+    text-align: right;
+}
+
+.textOrangeHaut {
+    vertical-align: bottom;
+}
+
+.textOrangeBas {
+    vertical-align: top;
+}
+
+.valeur {
+    color: black;
+}
+
+.temps {
+    background-color: rgb(140, 131, 120);
+    border-radius: 10%; border-style: solid; border-color: rgb(62, 54, 48);
+    width: 25%;
 }
