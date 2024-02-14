@@ -4,13 +4,14 @@ import { ProduitComponent } from './produit.component';
 import { ManagerComponent } from './manager.component';
 import { WebService } from '../car/webservice.service';
 import { World, Product, Pallier } from '../class/World';
+import { bigvalue } from '../class/bigvalue.pipe';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, ProduitComponent, ManagerComponent]
+    imports: [RouterOutlet, ProduitComponent, ManagerComponent, bigvalue]
 })
 export class AppComponent {
   title = "HellCapitalist"

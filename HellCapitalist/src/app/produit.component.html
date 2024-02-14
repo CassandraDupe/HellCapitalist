@@ -2,9 +2,10 @@
     <tbody>
         <tr class="ligneHaut">
             <td class="tdIMG" rowspan="2">
-                <img [src]="api + product.logo" [alt]="product.name"/>
                 <div>
-                    {{ product.quantite }}/{{ seu }}
+                    <img [src]="api + product.logo" [alt]="product.name"/>
+                
+                    <div>{{ product.quantite }}/{{ seu }}</div>
                 </div>
             </td>
             <td colspan="2" class="vitesse">
