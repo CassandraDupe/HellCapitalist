@@ -11,6 +11,10 @@ td{
     text-align: center;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 .tdIMG {
     width: 23%
 }
@@ -34,17 +38,25 @@ td{
 
 .vitesse {
     background-color: rgb(100, 181, 63);
-    border-style: solid; border-color: rgb(62, 54, 48); height: 50%;
+    border-style: solid; border-color: rgb(62, 54, 48);
     border-top-right-radius: 10vh; border-bottom-right-radius: 10vh;
+    height: 5vh;
 }
 
 .ligneBas {
     height: 60%;
 }
 
+.tabAchat {
+    border-radius: 1vw; border-style: solid; border-color: rgb(62, 54, 48);
+}
+
 .tabOrange {
     background-color: rgb(253, 128, 66);
-    border-radius: 1vw; border-style: solid; border-color: rgb(62, 54, 48);
+}
+
+.tabGris {
+    background-color: rgb(140, 131, 120);
 }
 
 .textOrange {

@@ -45,7 +45,7 @@
         </table>
         <div>
           @for (prod of world.products; track prod.id) {
-            <produit [params]="{api:api ,prod:prod, mult:mult, money:world.money}"/>
+            <produit [params]="{api:api ,prod:prod, mult:mult, money:world.money}" (refresh)="onProductionDone($event)" (onBuy)="onBuy($event)"/>
           }
         </div>
       </td>

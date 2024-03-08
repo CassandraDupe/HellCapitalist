@@ -49,6 +49,28 @@ export class AppComponent {
     }
   }
 
+  affichMoney(){
+    this.affMoney = ""+this.world.money;
+    this.valeur = "";
+    if(this.world.money>=1000000){
+      let truc = Math.floor(Math.log(this.world.money) / Math.log(1000));
+      this.valeur = this.Illions[truc];
+      this.affMoney = this.affMoney.substring(0,this.affMoney.length-3*truc)+"."+this.affMoney.substring(this.affMoney.length-3*(truc),this.affMoney.length-3*(truc-1));
+    }
+  }
+
+  onProductionDone(p: Product){
+    this.world.money = this.world.money + (p.revenu * p.quantite);
+    
+    this.affichMoney();
+  }
+
+  onBuy(n: number){
+    this.world.money = this.world.money - n;
+    
+    this.affichMoney();
+  }
+
   //api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/graphql';
   api = '';
   world: World = new World();
@@ -67,19 +89,13 @@ export class AppComponent {
 
     this.world = this.getWorldOffLine();
 
-    this.affMoney = ""+this.world.money;
-    this.valeur = "";
-    if(this.world.money>=1000000){
-      let truc = Math.floor(Math.log(this.world.money) / Math.log(1000));
-      this.valeur = this.Illions[truc];
-      this.affMoney = this.affMoney.substring(0,this.affMoney.length-3*truc)+"."+this.affMoney.substring(this.affMoney.length-3*(truc),this.affMoney.length-3*(truc-1));
-    }
+    this.affichMoney();
   }
 
   getWorldOffLine () {
     return {"name": "A Nice World 2",
     "logo": "../assets/satan.png",
-    "money": 1000000000,
+    "money": 1000,
     "score": 2,
     "totalangels": 0,
     "activeangels": 0,

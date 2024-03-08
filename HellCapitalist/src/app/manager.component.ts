@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Pallier } from '../class/World';
-import { reverse } from 'node:dns';
 
 @Component({
   selector: 'manager',
