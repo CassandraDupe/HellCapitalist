@@ -65,8 +65,20 @@ export class AppComponent {
     this.affichMoney();
   }
 
-  onBuy(n: number){
+  onBuyProd(n: number){
     this.world.money = this.world.money - n;
+    
+    this.affichMoney();
+  }
+
+  onBuyMan(man: Pallier){
+    this.world.money = this.world.money - man.seuil;
+
+    this.world.managers[man.idcible-1].unlocked = true;
+
+    let updatedProduct = {...this.world.products[man.idcible-1]};
+    updatedProduct.managerUnlocked = true;
+    this.world.products[man.idcible-1] = updatedProduct;
     
     this.affichMoney();
   }
@@ -95,7 +107,7 @@ export class AppComponent {
   getWorldOffLine () {
     return {"name": "A Nice World 2",
     "logo": "../assets/satan.png",
-    "money": 1000,
+    "money": 1000000,
     "score": 2,
     "totalangels": 0,
     "activeangels": 0,

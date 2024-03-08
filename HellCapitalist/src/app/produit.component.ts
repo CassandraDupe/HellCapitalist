@@ -26,7 +26,6 @@ export class ProduitComponent implements AfterViewInit {
   achat = -1;
   cout = -1;
   affCout!: string | undefined;
-  progressbarvalue = 0;
   coulAchat = "tabGris";
   stateIMG = "";
 
@@ -47,7 +46,7 @@ export class ProduitComponent implements AfterViewInit {
       }
     }
     if(this.multiplicateur == "MAX"){
-      this.achat = Math.floor(Math.log(1-((this.totMoney*(1-this.product.croissance))/this.product.cout)) / Math.log(this.product.croissance));
+      this.achat = Math.floor(Math.log(1-((this.totMoney*(1-this.product.croissance))/this.product.cout)) / Math.log(this.product.croissance)); // calcMaxCanBuy
     }
     this.cout = Math.floor(
     this.product.cout*((1-Math.pow(this.product.croissance,this.achat))/(1-this.product.croissance)));
@@ -76,20 +75,24 @@ export class ProduitComponent implements AfterViewInit {
     this.enoughtQ = this.product.quantite>0;
     this.stateIMG = "";
     if(this.enoughtQ){
-      this.stateIMG = "clickable"
+      this.stateIMG = "clickable";
+    }
+    this.initialValue = this.product.vitesse-this.product.timeleft;
+    if (this.product.timeleft != 0 || this.product.managerUnlocked){
+      this.run = true;
     }
   }
 
   orientation = Orientation.horizontal;
 
-  bar_run = false;
   lastUpdate = Date.now();
 
   startFabrication() {
-    if(this.enoughtQ){
+    if(this.enoughtQ && !this.run){
       this.product.timeleft = this.product.vitesse;
       this.lastUpdate = Date.now();
-      this.bar_run = true;
+      this.run = true;
+      this.initialValue = 0;
     }
   }
 
@@ -107,16 +110,20 @@ export class ProduitComponent implements AfterViewInit {
     }
   }
 
+
+  initialValue = 0;
+  run = false;
   calcScore(){
-    if(this.product.timeleft !== 0){
+    if(this.run){
       this.product.timeleft = this.product.timeleft - (Date.now() - this.lastUpdate);
       this.lastUpdate = Date.now();
       if(this.product.timeleft <= 0){
         this.product.timeleft = 0;
         this.refresh.emit(this.product);
-      }
-      if(this.product.timeleft > 0){
-        this.progressbarvalue = ((this.product.vitesse - this.product.timeleft) / this.product.vitesse) * 100;
+        if(!this.product.managerUnlocked){
+          this.run = false;
+        }
+        this.initialValue = 0;
       }
     }
   }

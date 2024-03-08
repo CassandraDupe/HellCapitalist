@@ -7,13 +7,13 @@
             <td class="manName">
                 {{ man.name }}
             </td>
-            <td rowspan="3" class="manHire">
+            <td rowspan="3" class="manHire" (click)="buy()">
                 <button name="hire">Hire!</button>
             </td>
         </tr>
         <tr>
             <td class="manRun">
-                Runs {{ man.idcible }}
+                Runs {{ prods[man.idcible-1].name }}
             </td>
         </tr>
         <tr>

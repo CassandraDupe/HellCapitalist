@@ -45,7 +45,7 @@
         </table>
         <div>
           @for (prod of world.products; track prod.id) {
-            <produit [params]="{api:api ,prod:prod, mult:mult, money:world.money}" (refresh)="onProductionDone($event)" (onBuy)="onBuy($event)"/>
+            <produit [params]="{api:api ,prod:prod, mult:mult, money:world.money}" (refresh)="onProductionDone($event)" (onBuy)="onBuyProd($event)"/>
           }
         </div>
       </td>
@@ -69,7 +69,9 @@
       <p>Hire to run your business for you, or to maximize efficiency, all for just one easy payment! SOULS !!!</p>
       <div>
         @for (man of world.managers; track man.idcible) {
-          <manager [params]="{api:api ,manager:man}"/>
+          @if (!man.unlocked) {
+            <manager [params]="{api:api ,manager:man, products: world.products, money: world.money}" (onBuy)="onBuyMan($event)"/>
+          }
         }
       </div>
     }

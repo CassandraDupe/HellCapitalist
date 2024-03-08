@@ -90,6 +90,6 @@ img.clickSatan{
 #pages {
     overflow:scroll;
     width: 74%; height: 90vh;
-    position: absolute; left: 13%; bottom:0vh;
+    position: fixed; left: 13%; bottom:0vh;
     background-color: brown;
 }
