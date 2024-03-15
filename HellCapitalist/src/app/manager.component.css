@@ -2,10 +2,12 @@ table {
     display: block;
     width: 84%;
     position: relative; left: 8%;
+    background-color: rgb(222, 222, 222);
 }
 
 .manIMG img {
     width: 100%;
+    image-rendering:pixelated;
 }
 
 .manIMG {
@@ -20,21 +22,33 @@ td{
 
 .manName {
     font-size: 3vw;
+    color: rgb(71, 161, 203);
 }
 
 .manRun {
     font-size: 1.5vw;
     height: 20%;
+    color: rgb(110, 110, 110);
 }
 
 .manCout {
     font-size: 2.5vw;
     height: 40%;
+    color: rgb(80, 73, 65);
 }
 .manHire {
     width: 20%;
 }
 .manHire button{
     height: 100%; width: 100%;
-    font-size: 3vw;
+    font-size: 3vw; color: rgb(115, 102, 93);
+    background-color: rgb(185, 180, 176); border-color: rgb(105, 99, 95);
+}
+
+.manHire button.clickable {
+    cursor: pointer;
+}
+
+.manHire button.clickable:hover{
+    background-color: rgb(163, 160, 157);
 }

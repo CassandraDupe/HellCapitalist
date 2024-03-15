@@ -19,6 +19,7 @@ export class ManagerComponent {
   prods = [new Product];
   totMoney!: number;
   enoughtM = false;
+  clickMan="";
 
 
   @Input()
@@ -27,8 +28,10 @@ export class ManagerComponent {
     this.man = value.manager;
     this.prods = value.products;
     this.totMoney = value.money!;
+    this.clickMan="";
     if(this.totMoney>=this.man.seuil){
       this.enoughtM = true;
+      this.clickMan="clickable";
     }
   }
 

@@ -7,8 +7,8 @@
             <td class="manName">
                 {{ man.name }}
             </td>
-            <td rowspan="3" class="manHire" (click)="buy()">
-                <button name="hire">Hire!</button>
+            <td rowspan="3" class="manHire">
+                <button [class]="clickMan" name="hire" (click)="buy()">Hire!</button>
             </td>
         </tr>
         <tr>

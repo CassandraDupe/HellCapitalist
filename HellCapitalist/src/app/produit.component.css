@@ -25,7 +25,7 @@ td{
 }
 
 .tdIMG img {
-    width: 100%;
+    width: 100%; image-rendering:pixelated;
     border-radius: 50%; border-color: rgb(62, 54, 48); border-style: solid;
 }
 
@@ -53,6 +53,10 @@ td{
 
 .tabOrange {
     background-color: rgb(253, 128, 66);
+}
+
+.tabOrange:hover {
+    background-color: rgb(222, 113, 58);
 }
 
 .tabGris {
