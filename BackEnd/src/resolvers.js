@@ -1,3 +1,5 @@
+const {lastupdate} = require("./world");
+
 function saveWorld(context) {
     const fs = require('fs');
     fs.writeFile("userworlds/" + context.user + "-world.json",
@@ -74,7 +76,33 @@ module.exports = {
     }
 }
 
-function updateScore(context){
-    
+
+// Fonction pas aboutie. A finir !!!!!
+// Vérifier le timeleft et comment l'appeler. Peut-être product.timeleft
+function CondiCalcul (parent, args, context, info){
+    // On récupère un produit du monde selon son id
+    let product = context.world.products.findIndex (p => p.id === args.id)
+    // Calcul de la date actuelle
+    const today = new Date(Date.now());
+    today.toLocaleDateString();
+    // Calcul du temps écoulé depuis la dernière mise à jour
+    let elapsetime = today - lastupdate;
+    elapsetime -= product.vitesse-timeleft;
+    if (product.managerUnlocked){
+        timeleft = product.vitesse - elapsetime%product.vitesse;
+        nbrProduit = Math.trunc(elapsetime / product.vitesse);
+    } else {
+        if (timeleft != 0){
+            if (product.timeleft <= elapsetime){
+                nProd = 1;
+                product.timeleft = 0;
+            } else {
+                product.timeleft -= elapsetime;
+            }
+        }
+    }
 }
-;
+
+function calculScore(parent, args, context, info){
+    let products = context.world.products;
+}
