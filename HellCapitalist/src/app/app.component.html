@@ -1,14 +1,13 @@
-<table style="width: 100%; height: 100%;">
+<table id="APP">
   <tbody>
     <tr>
       <td id="menu">
         <li class="satan">
           @if(connecte == null) {
             <img class="satan" alt="non connecté" src="../assets/satan_blank.png"/>
-            <input type="text" id="user-name"/>
-            <input type="submit" id="submit"/>
+            <input type="text" id="user-name"/><input type="submit" id="submit" value="➤" (click)="connection()"/>
           } @else if(!connecte){
-            <img class="satan" alt="non connecté" src="../assets/satan_blank.png" (click)="connection()"/>
+            <img class="satan clickSatan" alt="non connecté" src="../assets/satan_blank.png" (click)="connection()"/>
           } @else if(connecte) {
             <img class="satan" alt="connecté" src="../assets/satan.png"/>
           }
@@ -28,11 +27,16 @@
           </li>
         </div>
       </td>
-      <td id="jeu" style="height: 100%; border-color: black; border-style: solid;">
+      <td id="jeu">
         <table style="width: 100%;">
           <tbody>
             <tr>
-              <td id="argent">{{ "$ " + affMoney + " " + valeur }}</td>
+              <td id="argent">
+                {{ "$ " + affMoney}}
+                <span>
+                  {{ valeur }}
+                </span>
+              </td>
               <td id="multiplicateur">
                 <button name="mult" (click)="onClick()">{{ mult }}</button>
               </td>
@@ -41,7 +45,7 @@
         </table>
         <div>
           @for (prod of world.products; track prod.id) {
-            <produit [params]="{prod:prod, mult:mult, money:world.money}"/>
+            <produit [params]="{api:api ,prod:prod, mult:mult, money:world.money}" (refresh)="onProductionDone($event)" (onBuy)="onBuyProd($event)"/>
           }
         </div>
       </td>
@@ -50,27 +54,35 @@
 </table>
 
 @if (display != 0) {
-  <div id="pages">
-    <button name="close" (click)="closePage()">X</button>
+    <button id="close" name="close" (click)="closePage()">❌</button>
     @if (display == 1) {
-      <h2>Unlocks</h2>
-      <p>Want to maximize profits? Look no further! Get your investment</p>
+      <div class="pages">
+        <h2>Unlocks</h2>
+        <p>Want to maximize profits? Look no further! Get your investment</p>
+      </div>
     }
     @if (display == 2) {
-      Upgrades !!!
+      <div class="pages">
+        <h2>Upgrades !!!</h2>
+      </div>
     }
     @if (display == 3) {
-      <h2>Managers</h2>
-      <h5>Managers make life easier !</h5>
-      <p>Hire to run your business for you, or to maximize efficiency, all for just one easy payment! SOULS !!!</p>
-      <div>
-        @for (man of world.managers; track man.idcible) {
-          <manager [man]="man"/>
-        }
+      <div class="pages">
+        <h2 class="man">Managers</h2>
+        <h5 class="man">Managers make life easier !</h5>
+        <p class="man">Hire to run your business for you, or to maximize efficiency, all for just one easy payment! SOULS !!!</p>
+        <div class="man">
+          @for (man of world.managers; track man.idcible) {
+            @if (!man.unlocked) {
+              <manager [params]="{api:api ,manager:man, products: world.products, money: world.money}" (onBuy)="onBuyMan($event)"/>
+            }
+          }
+        </div>
       </div>
     }
     @if (display == 4) {
-      Investors !!!
+      <div class="pages">
+        <h2>Investors !!!</h2>
+      </div>
     }
-  </div>
 }

@@ -1,34 +1,50 @@
 <table>
     <tbody>
-    <tr>
-        <td class="tdIMG" rowspan="2">
-            <img [src]="api + product.logo" [alt]="product.name"/>
-        </td>
-        <td colspan="3">
-            {{ (product.revenu * product.quantite) / (product.vitesse / 1000) }} $/s
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Buy
-        </td>
-        <td>
-            {{ affCout }}
-        </td>
-        <td rowspan="2">
-            {{ product.vitesse / 1000 }} s
-        </td>
-    </tr>
-    <tr>
-        <td>
-            {{ product.quantite }}/{{ seu }}
-        </td>
-        <td>
-            {{ achat }}
-        </td>
-        <td>
-            {{ valeur }}
-        </td>
-    </tr>
-</tbody>
+        <tr class="ligneHaut">
+            <td class="tdIMG" rowspan="2">
+                <div>
+                    <img [src]="api + product.logo" [alt]="product.name" [class]="stateIMG" (click)="startFabrication()"/> <!---->
+                
+                    <div>{{ product.quantite }}/{{ seu }}</div>
+                </div>
+            </td>
+            <td colspan="2" class="vitesse">
+                <!--{{ (product.revenu * product.quantite) / (product.vitesse / 1000) }} $/s-->
+                <app-my-progress-bar [run]="run" [auto]="product.managerUnlocked"
+                    frontcolor="#008800"
+                    backcolor="rgb(100, 181, 63)"
+                    [orientation]="orientation" 
+                    [vitesse]="product.vitesse"
+                    [initialValue]="initialValue">
+                </app-my-progress-bar>
+            </td>
+        </tr>
+        <tr class="ligneBas">
+            <td>
+                <table [class]="'tabAchat '+coulAchat" (click)="buy()">
+                    <tbody>
+                        <tr>
+                            <td class="textOrange textOrangeGauche textOrangeHaut">
+                                Buy
+                            </td>
+                            <td class="textOrange textOrangeDroite textOrangeHaut">
+                                $ {{ affCout }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="textOrange textOrangeGauche textOrangeBas">
+                                {{ achat }}
+                            </td>
+                            <td class="valeur textOrangeDroite textOrangeBas">
+                                {{ valeur }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td class="temps">
+                {{ product.vitesse / 1000 }} s
+            </td>
+        </tr>
+    </tbody>
 </table>
