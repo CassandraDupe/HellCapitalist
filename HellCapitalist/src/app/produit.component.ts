@@ -13,7 +13,7 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrl: './produit.component.css'
 })
 export class ProduitComponent implements AfterViewInit {
-  @Output() refresh: EventEmitter<Product> = new EventEmitter<Product>();
+  @Output() refresh: EventEmitter<any> = new EventEmitter<any>();
   @Output() onBuy: EventEmitter<number> = new EventEmitter<number>();
 
   product!: Product;
@@ -78,7 +78,7 @@ export class ProduitComponent implements AfterViewInit {
       this.stateIMG = "clickable";
     }
     this.initialValue = this.product.vitesse-this.product.timeleft;
-    if (this.product.timeleft != 0 || this.product.managerUnlocked){
+    if (this.product.timeleft != 0 || (this.product.managerUnlocked && !this.run)){
       this.run = true;
     }
   }
@@ -113,7 +113,7 @@ export class ProduitComponent implements AfterViewInit {
 
   initialValue = 0;
   run = false;
-  calcScore(){
+  /*calcScore(){
     if(this.run){
       this.product.timeleft = this.product.timeleft - (Date.now() - this.lastUpdate);
       this.lastUpdate = Date.now();
@@ -126,26 +126,41 @@ export class ProduitComponent implements AfterViewInit {
         this.initialValue = 0;
       }
     }
-  }
+  }*/
 
-  /*calcScore (){
-    // Calcul du temps écoulé depuis la dernière mise à jour
-    let elapsetime = today - lastupdate;
-    elapsetime -= product.vitesse-timeleft;
-    if (product.managerUnlocked){
-        timeleft = product.vitesse - elapsetime%product.vitesse;
-        nbrProduit = Math.trunc(elapsetime / product.vitesse);
-    } else {
-        if (timeleft != 0){
-            if (product.timeleft <= elapsetime){
-                nProd = 1;
-                product.timeleft = 0;
-            } else {
-                product.timeleft -= elapsetime;
-            }
+
+  // PAS ENCORE FININN?????????
+  calcScore (){
+    if(this.run){
+      let nProduit = 0;
+      // Calcul du temps écoulé depuis la dernière mise à jour
+      let elapsetime = Date.now() - this.lastUpdate;
+      this.lastUpdate = Date.now();
+      elapsetime += this.product.vitesse - this.product.timeleft;
+      console.log('############################')
+      console.log('timeleft : '+this.product.timeleft);
+      console.log('vitesse - timeleft : '+(this.product.vitesse - this.product.timeleft));
+      console.log('elapse : '+elapsetime)
+      if (this.product.managerUnlocked){
+        this.product.timeleft = this.product.vitesse - elapsetime%this.product.vitesse;
+        nProduit = Math.trunc(elapsetime / this.product.vitesse);
+      } else {
+        if (this.product.timeleft != 0){
+          if (this.product.timeleft <= 0){
+            nProduit = 1;
+            this.product.timeleft = 0;
+            this.run = false;
+            this.initialValue = 0;
+          } else {
+            this.product.timeleft = this.product.vitesse - elapsetime;
+          }
         }
+      }
+      if (nProduit>0){
+        this.refresh.emit({prod: this.product, n: nProduit});
+      }
     }
-}*/
+  }
 
   buy(){
     if(this.enoughtM){

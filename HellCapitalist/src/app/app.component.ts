@@ -59,8 +59,8 @@ export class AppComponent {
     }
   }
 
-  onProductionDone(p: Product){
-    this.world.money = this.world.money + (p.revenu * p.quantite);
+  onProductionDone(event: any){
+    this.world.money = this.world.money + (event.prod.revenu * event.prod.quantite * event.n);
     
     this.affichMoney();
   }
@@ -70,6 +70,8 @@ export class AppComponent {
     
     this.affichMoney();
   }
+
+  // badgeManagers = 0; // Ne marche pas
 
   onBuyMan(man: Pallier){
     this.world.money = this.world.money - man.seuil;
