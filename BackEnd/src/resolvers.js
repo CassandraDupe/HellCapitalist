@@ -15,6 +15,7 @@ function saveWorld(context) {
 module.exports = {
     Query: {
         getWorld(parent, args, context, info) {
+            updateScore(context)
             saveWorld(context)
             return context.world
         }
@@ -22,6 +23,7 @@ module.exports = {
 
     Mutation: {
         acheterQtProduit(parent, args, context, info) {
+            updateScore(context);
             let products = context.world.products;
             let product = products.find(p => p.id === args.id)
             //console.log(`produit = ${product}`)
@@ -44,6 +46,7 @@ module.exports = {
         },
 
         lancerProductionProduit(parent, args, context, info) {
+            updateScore(context);
             let products = context.world.products;
             let product = products.find(p => p.id === args.id)
             if (product) {
@@ -56,12 +59,13 @@ module.exports = {
         },
 
         engagerManager(parent, args, context, info) {
+            updateScore(context);
             let managers = context.world.managers;
             let manager = managers.find(m => m.name === args.name)
             if (manager) {
                 if (context.world.money >= manager.seuil) {
                     let products = context.world.products
-                    let produit = products.find(p => p.id = manager.idcible)
+                    let product = products.find(p => p.id = manager.idcible)
                     manager.unlocked = true
                     saveWorld(context);
                 } else {
@@ -72,37 +76,48 @@ module.exports = {
                 throw new Error(
                     `Le manager avec l'id ${args.id} n'existe pas`)
             }
+        },
+
+        acheterCashUpgrade(parent, args, context, info) {
+            updateScore(context);
         }
     }
 }
 
-
-// Fonction pas aboutie. A finir !!!!!
-// Vérifier le timeleft et comment l'appeler. Peut-être product.timeleft
-function CondiCalcul (parent, args, context, info){
-    // On récupère un produit du monde selon son id
-    let product = context.world.products.findIndex (p => p.id === args.id)
-    // Calcul de la date actuelle
-    const today = new Date(Date.now());
-    today.toLocaleDateString();
-    // Calcul du temps écoulé depuis la dernière mise à jour
-    let elapsetime = today - lastupdate;
-    elapsetime -= product.vitesse-timeleft;
-    if (product.managerUnlocked){
-        timeleft = product.vitesse - elapsetime%product.vitesse;
+function condiCalcul(product, elapsetime, context) {
+    // On replace le elapsetime pour ne plus avoir de problème de temps restant
+    elapsetime += product.vitesse - product.timeleft;
+    // On déclare une variable pour compter le nbr de produits créés depuis le lastupdate
+    let nbrProduit = 0;
+    if (product.managerUnlocked) {
+        product.timeleft = product.vitesse - elapsetime % product.vitesse;
         nbrProduit = Math.trunc(elapsetime / product.vitesse);
     } else {
-        if (timeleft != 0){
-            if (product.timeleft <= elapsetime){
-                nProd = 1;
+        if (product.timeleft != 0) {
+            if (product.vitesse < elapsetime) {
+                nbrProduit = 1;
                 product.timeleft = 0;
             } else {
-                product.timeleft -= elapsetime;
+                product.timeleft = product.vitesse - elapsetime;
             }
         }
     }
+    let sous = nbrProduit * product.revenu;
+    context.world.score += sous;
+    context.world.money += sous;
 }
 
-function calculScore(parent, args, context, info){
+
+function updateScore(context) {
     let products = context.world.products;
+    // Calcul de la date actuelle
+    const today = Date.now();
+    // Convertion de lastupdate, qui est en string vers un entier
+    const lastup = parseInt(context.world.lastupdate);
+    // Calcul du temps écoulé depuis la dernière mise à jour
+    let elapsetime = today - lastup;
+    context.world.lastupdate = today;
+    for (let p of products) {
+        condiCalcul(p, elapsetime, context);
+    }
 }
