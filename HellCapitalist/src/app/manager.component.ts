@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Pallier } from '../class/World';
+import { Palier } from '../class/World';
 import { Product } from '../class/World';
 
 @Component({
@@ -11,10 +11,10 @@ import { Product } from '../class/World';
   styleUrl: './manager.component.css'
 })
 export class ManagerComponent {
-  @Output() onBuy: EventEmitter<Pallier> = new EventEmitter<Pallier>();
+  @Output() onBuy: EventEmitter<Palier> = new EventEmitter<Palier>();
 
   api = '';
-  man = new Pallier;
+  man = new Palier;
   affCout = "";
   prods = [new Product];
   totMoney!: number;

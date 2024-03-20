@@ -3,15 +3,16 @@ import { RouterOutlet } from '@angular/router';
 import { ProduitComponent } from './produit.component';
 import { ManagerComponent } from './manager.component';
 import { WebService } from '../car/webservice.service';
-import { World, Product, Pallier } from '../class/World';
+import { World, Product, Palier } from '../class/World';
 import { bigvalue } from '../class/bigvalue.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, ProduitComponent, ManagerComponent, bigvalue]
+    imports: [RouterOutlet, ProduitComponent, ManagerComponent, bigvalue, FormsModule]
 })
 export class AppComponent {
   title = "HellCapitalist"
@@ -41,10 +42,23 @@ export class AppComponent {
 
   connecte: boolean | null = false;
 
+  username = localStorage.getItem("username") || "";
+
   connection() {
     if(this.connecte == false){
+      if(this.username == null || this.username == ""){
+        this.username = "Satan"+Math.floor(Math.random() * 10000);
+      }
       this.connecte = null;
     } else if (this.connecte == null){
+
+      localStorage.setItem("username", this.username);
+      this.service.user = this.username;
+      this.service.getWorld().then(
+        world => {
+          this.world = world.data.getWorld;
+        }
+      );
       this.connecte = true;
     }
   }
@@ -73,7 +87,7 @@ export class AppComponent {
 
   // badgeManagers = 0; // Ne marche pas
 
-  onBuyMan(man: Pallier){
+  onBuyMan(man: Palier){
     this.world.money = this.world.money - man.seuil;
 
     this.world.managers[man.idcible-1].unlocked = true;
@@ -85,7 +99,7 @@ export class AppComponent {
     this.affichMoney();
   }
 
-  //api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/graphql';
+  // api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/';
   api = '';
   world: World = new World();
 
@@ -95,13 +109,15 @@ export class AppComponent {
 
 
   constructor(private service: WebService) {
-    /*service.getWorld().then(
+    this.api = service.api;
+    service.getWorld().then(
       world => {
+        console.log("coucou")
         this.world = world.data.getWorld;
       }
-    );*/
+    );
 
-    this.world = this.getWorldOffLine();
+    // this.world = this.getWorldOffLine();
 
     this.affichMoney();
   }
@@ -127,7 +143,7 @@ export class AppComponent {
         "quantite": 1,
         "timeleft": 0,
         "managerUnlocked": false,
-        "palliers": [
+        "paliers": [
           {
             "name": "Paper is beautiful !",
             "logo": "icones/sacpapier.jpg",
@@ -177,7 +193,7 @@ export class AppComponent {
         "quantite": 0,
         "timeleft": 0,
         "managerUnlocked": false,
-        "palliers": [
+        "paliers": [
           {
             "name": "Give me some good bins !",
             "logo": "icones/recyclage.jpg",
@@ -227,7 +243,7 @@ export class AppComponent {
         "quantite": 0,
         "timeleft": 0,
         "managerUnlocked": false,
-        "palliers": [
+        "paliers": [
           {
             "name": "More Bicycles !",
             "logo": "icones/velo.jpg",
@@ -277,7 +293,7 @@ export class AppComponent {
         "quantite": 0,
         "timeleft": 0,
         "managerUnlocked": false,
-        "palliers": [
+        "paliers": [
           {
             "name": "These cars are wizzzzzz !",
             "logo": "icones/voitureelec.jpg",
@@ -327,7 +343,7 @@ export class AppComponent {
         "quantite": 0,
         "timeleft": 0,
         "managerUnlocked": false,
-        "palliers": [
+        "paliers": [
           {
             "name": "I feel like the wind !",
             "logo": "icones/eolienne.jpg",
@@ -377,7 +393,7 @@ export class AppComponent {
         "quantite": 0,
         "timeleft": 0,
         "managerUnlocked": false,
-        "palliers": [
+        "paliers": [
           {
             "name": "Let's the sun shining ! ",
             "logo": "icones/solar.jpg",

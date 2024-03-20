@@ -1,9 +1,10 @@
 import { AfterViewInit, Component, EventEmitter, Input, PLATFORM_ID, Inject, Output, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Product } from '../class/World';
+import { Product, Palier } from '../class/World';
 import { MyProgressBarComponent } from './progressbar.component';
 import { Orientation } from './progressbar.component';
 import { isPlatformBrowser } from '@angular/common';
+import { WebService } from '../car/webservice.service';
 
 @Component({
   selector: 'produit',
@@ -63,9 +64,10 @@ export class ProduitComponent implements AfterViewInit {
   set params(value: any) {
     this.api = value.api!;
     this.product = value.prod!;
-    this.seu = this.product.palliers.find(elem => elem.unlocked == false)?.seuil;
     this.multiplicateur = value.mult!;
     this.totMoney = value.money!;
+    console.log(this.product.paliers);
+    this.seu = this.product.paliers.find(elem => elem.unlocked == false)?.seuil;   
     this.affichCout();
     this.enoughtM = (this.totMoney>=this.cout && this.cout!=0);
     this.coulAchat = "tabGris";
@@ -89,6 +91,9 @@ export class ProduitComponent implements AfterViewInit {
 
   startFabrication() {
     if(this.enoughtQ && !this.run){
+      this.service.lancerProduction(this.product).catch(reason =>
+        console.log("erreur: " + reason)
+        );
       this.product.timeleft = this.product.vitesse;
       this.lastUpdate = Date.now();
       this.run = true;
@@ -98,8 +103,9 @@ export class ProduitComponent implements AfterViewInit {
 
   isBrowser = signal(false);
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: object
+  constructor (
+    @Inject(PLATFORM_ID) private platformId: object,
+    private service: WebService
   ) {
     this.isBrowser.set(isPlatformBrowser(platformId));
   }
@@ -113,23 +119,7 @@ export class ProduitComponent implements AfterViewInit {
 
   initialValue = 0;
   run = false;
-  /*calcScore(){
-    if(this.run){
-      this.product.timeleft = this.product.timeleft - (Date.now() - this.lastUpdate);
-      this.lastUpdate = Date.now();
-      if(this.product.timeleft <= 0){
-        this.product.timeleft = 0;
-        this.refresh.emit(this.product);
-        if(!this.product.managerUnlocked){
-          this.run = false;
-        }
-        this.initialValue = 0;
-      }
-    }
-  }*/
 
-
-  // PAS ENCORE FININN?????????
   calcScore (){
     if(this.run){
       let nProduit = 0;
@@ -137,10 +127,10 @@ export class ProduitComponent implements AfterViewInit {
       let elapsetime = Date.now() - this.lastUpdate;
       this.lastUpdate = Date.now();
       elapsetime += this.product.vitesse - this.product.timeleft;
-      console.log('############################')
+      /*console.log('############################')
       console.log('timeleft : '+this.product.timeleft);
       console.log('vitesse - timeleft : '+(this.product.vitesse - this.product.timeleft));
-      console.log('elapse : '+elapsetime)
+      console.log('elapse : '+elapsetime)*/
       if (this.product.managerUnlocked){
         this.product.timeleft = this.product.vitesse - elapsetime%this.product.vitesse;
         nProduit = Math.trunc(elapsetime / this.product.vitesse);
@@ -168,7 +158,7 @@ export class ProduitComponent implements AfterViewInit {
       this.product.quantite = this.product.quantite + this.achat;
       this.product.cout = this.product.cout * Math.pow(this.product.croissance,this.achat+1);
       this.affichCout();
-      this.seu = this.product.palliers.find(elem => elem.unlocked == false)?.seuil;
+      this.seu = this.product.paliers.find(elem => elem.unlocked == false)?.seuil;
     }
   }
 }

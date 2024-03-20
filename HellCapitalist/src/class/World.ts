@@ -8,10 +8,10 @@ export class World {
     angelbonus: number = 0
     lastupdate: string = ""
     products : Product[]
-    allunlocks: Pallier[]
-    upgrades: Pallier[]
-    angelupgrades: Pallier[]
-    managers: Pallier[]
+    allunlocks: Palier[]
+    upgrades: Palier[]
+    angelupgrades: Palier[]
+    managers: Palier[]
     
     constructor() {
         this.products = [ ]
@@ -33,14 +33,14 @@ export class Product {
     quantite: number = 0
     timeleft: number = 0
     managerUnlocked: boolean = false
-    palliers : Pallier[]
+    paliers : Palier[]
     
     constructor() {
-        this.palliers = []
+        this.paliers = []
     }
 }
 
-export class Pallier {
+export class Palier {
     name: string = ""
     logo: string = ""
     seuil: number = 0

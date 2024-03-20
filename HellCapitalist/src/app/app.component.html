@@ -5,7 +5,7 @@
         <li class="satan">
           @if(connecte == null) {
             <img class="satan" alt="non connecté" src="../assets/satan_blank.png"/>
-            <input type="text" id="user-name"/><input type="submit" id="submit" value="➤" (click)="connection()"/>
+            <input type="text" id="user-name" [(ngModel)] = "username"/><input type="submit" id="submit" value="➤" (click)="connection()"/>
           } @else if(!connecte){
             <img class="satan clickSatan" alt="non connecté" src="../assets/satan_blank.png" (click)="connection()"/>
           } @else if(connecte) {
@@ -69,6 +69,11 @@
     @if (display == 3) {
       <div class="pages">
         <h2 class="man">Managers</h2>
+        <p>p</p>
+        <p>t</p>
+        <p>c</p>
+        <p>z</p>
+        <p>z</p>
         <h5 class="man">Managers make life easier !</h5>
         <p class="man">Hire to run your business for you, or to maximize efficiency, all for just one easy payment! SOULS !!!</p>
         <div class="man">
