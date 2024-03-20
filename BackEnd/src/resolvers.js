@@ -78,48 +78,46 @@ module.exports = {
             }
         },
 
-        acheterCashUpgrade(parent, args, context, info){
+        acheterCashUpgrade(parent, args, context, info) {
             updateScore(context);
         }
     }
 }
 
-function condiCalcul (product, elapsetime, context){
+function condiCalcul(product, elapsetime, context) {
+    // On replace le elapsetime pour ne plus avoir de problème de temps restant
+    elapsetime += product.vitesse - product.timeleft;
     // On déclare une variable pour compter le nbr de produits créés depuis le lastupdate
     let nbrProduit = 0;
-    elapsetime += product.vitesse-product.timeleft;
-    if (product.managerUnlocked){
-        product.timeleft = product.vitesse - elapsetime%product.vitesse;
+    if (product.managerUnlocked) {
+        product.timeleft = product.vitesse - elapsetime % product.vitesse;
         nbrProduit = Math.trunc(elapsetime / product.vitesse);
     } else {
-        if (product.timeleft != 0){
-            if (product.timeleft <= 0){
-                nProduit = 1;
+        if (product.timeleft != 0) {
+            if (product.vitesse < elapsetime) {
+                nbrProduit = 1;
                 product.timeleft = 0;
             } else {
-                product.timeleft -= elapsetime;
+                product.timeleft = product.vitesse - elapsetime;
             }
         }
     }
-    let sous = nbrProduit*product.revenu;
+    let sous = nbrProduit * product.revenu;
     context.world.score += sous;
-    context.world.monney += sous;
+    context.world.money += sous;
 }
 
 
-/// DEBUGAGE ///
-// ATTENTION A BIEN SET LASTUDATE A DATE.NOW A LA FIN DE LA FONCTION
-// POUR LE TIMELEFT IS UNDEFINED, FAIRE DES CONSOLE.LOG TOUT LE TEMPS POUR DECOUVRIR QUAND IL PASSE A UNDEFINED
-function updateScore(context){
+function updateScore(context) {
     let products = context.world.products;
     // Calcul de la date actuelle
-    const today = new Date();
+    const today = Date.now();
     // Convertion de lastupdate, qui est en string vers un entier
     const lastup = parseInt(context.world.lastupdate);
     // Calcul du temps écoulé depuis la dernière mise à jour
     let elapsetime = today - lastup;
-    for (let p of products){
+    context.world.lastupdate = today;
+    for (let p of products) {
         condiCalcul(p, elapsetime, context);
     }
-    context.world.lastupdate = today.toLocaleDateString();
 }
