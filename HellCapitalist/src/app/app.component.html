@@ -3,13 +3,20 @@
     <tr>
       <td id="menu">
         <li class="satan">
-          @if(connecte == null) {
+          <!--@if(connecte == null) {
             <img class="satan" alt="non connecté" src="../assets/satan_blank.png"/>
             <input type="text" id="user-name" [(ngModel)] = "username"/><input type="submit" id="submit" value="➤" (click)="connection()"/>
           } @else if(!connecte){
             <img class="satan clickSatan" alt="non connecté" src="../assets/satan_blank.png" (click)="connection()"/>
           } @else if(connecte) {
             <img class="satan" alt="connecté" src="../assets/satan.png"/>
+          }-->
+          @if(connecte) {
+            <img id="imgColor" class="satan" alt="connecté" src="../assets/satan.png"/>
+            <img id="imgBlank" class="satan" alt="se connecter" src="../assets/satan_blank.png" (click)="connection()"/>
+          } @else {
+            <img class="satan" alt="non connecté" src="../assets/satan_blank.png"/>
+            <input type="text" id="user-name" [(ngModel)] = "username"/><input type="submit" id="submit" value="➤" (click)="connection()"/>
           }
         </li>
         <div>

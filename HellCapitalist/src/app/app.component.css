@@ -23,8 +23,17 @@ img.satan {
     image-rendering:pixelated;
 }
 
-img.clickSatan{
+#imgBlank{
     cursor: pointer;
+    display: none; visibility: hidden;
+}
+
+li.satan:hover #imgColor{
+    display: none; visibility: hidden;
+}
+
+li.satan:hover #imgBlank{
+    display: block; visibility: visible;
 }
 
 #user-name {

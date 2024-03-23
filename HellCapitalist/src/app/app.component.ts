@@ -40,25 +40,19 @@ export class AppComponent {
     this.mult = this.mults.at(this.i)!;
   }
 
-  connecte: boolean | null = false;
-
-  username = localStorage.getItem("username") || "";
+  connecte = true;
 
   connection() {
-    if(this.connecte == false){
-      if(this.username == null || this.username == ""){
-        this.username = "Satan"+Math.floor(Math.random() * 10000);
-      }
-      this.connecte = null;
-    } else if (this.connecte == null){
-
+    if(this.connecte){
+      this.connecte = false;
+    } else {
       localStorage.setItem("username", this.username);
-      this.service.user = this.username;
+      /*this.service.user = this.username;
       this.service.getWorld().then(
         world => {
           this.world = world.data.getWorld;
         }
-      );
+      );*/
       this.connecte = true;
     }
   }
@@ -99,7 +93,6 @@ export class AppComponent {
     this.affichMoney();
   }
 
-  // api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/';
   api = '';
   world: World = new World();
 
@@ -107,17 +100,24 @@ export class AppComponent {
   valeur: string | undefined;
   Illions = ["","","Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion", "Trigintillion", "Quadragintillion", "Quinquagintillion", "Sexagintillion", "Septuagintillion", "Octogintillion", "Nonagintillion", "Centillion", "Ducentillion", "Trucentillion", "Quadringentillion", "Quingentillion", "Sescentillion", "Septingentillion", "Octingentillion", "Nongentillion"]
 
+  username = localStorage.getItem("username") || "";
 
   constructor(private service: WebService) {
-    this.api = service.api;
+    /*this.api = service.api;
     service.getWorld().then(
       world => {
         console.log("coucou")
         this.world = world.data.getWorld;
       }
-    );
+    );*/
 
-    // this.world = this.getWorldOffLine();
+    if(this.username == null || this.username == ""){
+      this.username = "Satan"+Math.floor(Math.random() * 10000);
+    }
+
+    this.service.user = this.username;
+
+    this.world = this.getWorldOffLine();
 
     this.affichMoney();
   }
