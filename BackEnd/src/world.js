@@ -16,7 +16,7 @@ module.exports = {
             "croissance": 1.07,
             "revenu": 1,
             "vitesse": 500,
-            "quantite": 0,
+            "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
@@ -48,7 +48,7 @@ module.exports = {
             "croissance": 1.2,
             "revenu": 7,
             "vitesse": 3000,
-            "quantite": 0,
+            "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [

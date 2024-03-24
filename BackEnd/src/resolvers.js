@@ -50,24 +50,29 @@ module.exports = {
             let products = context.world.products;
             let product = products.find(p => p.id === args.id)
             if (product) {
-                product.vitesse = product.timeleft
+                product.timeleft = product.vitesse
                 saveWorld(context);
+                return (product);
             } else {
                 throw new Error(
                     `Le produit avec l'id ${args.id} n'existe pas`)
             }
         },
 
+        /// NE MARCHE PAS, SE CONCENTRER DESSUS ///
+        /// RENVOIE UNLOCK = NULL ///
         engagerManager(parent, args, context, info) {
             updateScore(context);
             let managers = context.world.managers;
             let manager = managers.find(m => m.name === args.name)
             if (manager) {
                 if (context.world.money >= manager.seuil) {
+                    manager.unlocked = true;
                     let products = context.world.products
                     let product = products.find(p => p.id = manager.idcible)
-                    manager.unlocked = true
+                    product.managerUnlocked = true;
                     saveWorld(context);
+                    return (manager, product);
                 } else {
                     throw new Error(
                         `Vous n'avez pas assez d'argent pour acheter ce manager`)
