@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createClient, fetchExchange } from '@urql/core';
-import { GET_WORLD, LANCER_PRODUCTION } from './Grapqhrequests'
-import { Product } from '../class/World';
+import { ACHETER_QT, ENGAGER, GET_WORLD, LANCER_PRODUCTION } from './Grapqhrequests'
+import { Palier, Product } from '../class/World';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,13 @@ export class WebService {
 
     lancerProduction(product: Product) {
         return this.createClient().mutation(LANCER_PRODUCTION, { id:product.id}).toPromise();
+    }
+
+    acheterQt(product: Product, qt:number) {
+        return this.createClient().mutation(ACHETER_QT, { id:product.id, quantite: qt}).toPromise();
+    }
+
+    engager(manager: Palier) {
+        return this.createClient().mutation(ENGAGER, { name:manager.name}).toPromise();
     }
 }

@@ -78,3 +78,17 @@ const GET_WORLD = gql`
                 id
             }
         }`;
+
+    export const ACHETER_QT = gql`
+        mutation acheterQtProduit($id: Int!, $quantite: Int!) {
+            acheterQtProduit(id: $id, quantite: $quantite) {
+                id, quantite
+            }
+        }`;
+
+    export const ENGAGER = gql`
+        mutation engagerManager($name: String!) {
+            engagerManager(name: $name) {
+                name
+            }
+        }`;

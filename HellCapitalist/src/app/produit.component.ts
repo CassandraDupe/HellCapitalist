@@ -57,6 +57,7 @@ export class ProduitComponent implements AfterViewInit {
       let truc = Math.floor(Math.log(this.cout) / Math.log(1000));
       this.valeur = this.Illions[truc];
       this.affCout = this.affCout.substring(0,this.affCout.length-3*truc)+"."+this.affCout.substring(this.affCout.length-3*(truc),this.affCout.length-3*(truc-1));
+      // Oui je sais, à un moment (quand on arrivera au dernier illion de la liste) ça marchera plus
     }
   }
 
@@ -66,7 +67,7 @@ export class ProduitComponent implements AfterViewInit {
     this.product = value.prod!;
     this.multiplicateur = value.mult!;
     this.totMoney = value.money!;
-    console.log(this.product.paliers);
+    // console.log(this.product.paliers);
     this.seu = this.product.paliers.find(elem => elem.unlocked == false)?.seuil;   
     this.affichCout();
     this.enoughtM = (this.totMoney>=this.cout && this.cout!=0);
@@ -154,6 +155,9 @@ export class ProduitComponent implements AfterViewInit {
 
   buy(){
     if(this.enoughtM){
+      this.service.acheterQt(this.product, this.achat).catch(reason =>
+        console.log("erreur: " + reason)
+        );
       this.onBuy.emit(this.cout);
       this.product.quantite = this.product.quantite + this.achat;
       this.product.cout = this.product.cout * Math.pow(this.product.croissance,this.achat+1);

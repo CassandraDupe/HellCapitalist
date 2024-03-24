@@ -47,12 +47,14 @@ export class AppComponent {
       this.connecte = false;
     } else {
       localStorage.setItem("username", this.username);
-      /*this.service.user = this.username;
+      this.service.user = this.username;
       this.service.getWorld().then(
         world => {
           this.world = world.data.getWorld;
+          this.affichMoney();
         }
-      );*/
+      );
+
       this.connecte = true;
     }
   }
@@ -103,23 +105,20 @@ export class AppComponent {
   username = localStorage.getItem("username") || "";
 
   constructor(private service: WebService) {
-    /*this.api = service.api;
-    service.getWorld().then(
-      world => {
-        console.log("coucou")
-        this.world = world.data.getWorld;
-      }
-    );*/
-
     if(this.username == null || this.username == ""){
       this.username = "Satan"+Math.floor(Math.random() * 10000);
     }
-
     this.service.user = this.username;
+    this.api = service.api;
+    service.getWorld().then(
+      world => {
+        this.world = world.data.getWorld;
+        // console.log(this.world.money);
+        this.affichMoney();
+      }
+    );
 
-    this.world = this.getWorldOffLine();
-
-    this.affichMoney();
+    // this.world = this.getWorldOffLine();
   }
 
   getWorldOffLine () {

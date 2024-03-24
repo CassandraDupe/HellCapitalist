@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Palier } from '../class/World';
 import { Product } from '../class/World';
+import { WebService } from '../car/webservice.service';
 
 @Component({
   selector: 'manager',
@@ -21,6 +22,10 @@ export class ManagerComponent {
   enoughtM = false;
   clickMan="";
 
+  constructor (
+    private service: WebService
+  ) {}
+
 
   @Input()
   set params(value: any) {
@@ -37,6 +42,9 @@ export class ManagerComponent {
 
   buy(){
     if(this.enoughtM){
+      this.service.engager(this.man).catch(reason =>
+        console.log("erreur: " + reason)
+        );
       this.onBuy.emit(this.man);
     }
   }
