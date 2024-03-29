@@ -1,6 +1,6 @@
 module.exports = {
     "name": "Hell Capitalist",
-    "logo": "icones/logomonde.jpg",
+    "logo": "icones/logomonde.png",
     "money": 0,
     "score": 0,
     "totalangels": 0,
@@ -11,7 +11,7 @@ module.exports = {
         {
             "id": 1,
             "name": "Lava",
-            "logo": "../Public/Icones/lava.jpg",
+            "logo": "../icones/lava.png",
             "cout": 4,
             "croissance": 1.07,
             "revenu": 1,
@@ -22,7 +22,7 @@ module.exports = {
             "paliers": [
                 {
                     "name": "Premier palier",
-                    "logo": "../Public/Icones/lava.jpg",
+                    "logo": "../icones/lava.png",
                     "seuil": 25,
                     "idcible": 1,
                     "ratio": 2,
@@ -31,7 +31,7 @@ module.exports = {
                 },
                 {
                     "name": "Deuxième palier",
-                    "logo": "../Public/Icones/lava.jpg",
+                    "logo": "../icones/lava.png",
                     "seuil": 50,
                     "idcible": 1,
                     "ratio": 2,
@@ -43,7 +43,7 @@ module.exports = {
         {
             "id": 2,
             "name": "Dog toys",
-            "logo": "../Public/Icones/dog_toys.jpg",
+            "logo": "../icones/dog_toys.png",
             "cout": 16,
             "croissance": 1.2,
             "revenu": 7,
@@ -54,7 +54,7 @@ module.exports = {
             "paliers": [
                 {
                     "name": "Premier palier",
-                    "logo": "../Public/Icones/dog_toys.jpg",
+                    "logo": "../icones/dog_toys.png",
                     "seuil": 25,
                     "idcible": 2,
                     "ratio": 2,
@@ -63,7 +63,7 @@ module.exports = {
                 },
                 {
                     "name": "Deuxième palier",
-                    "logo": "../Public/Icones/dog_toys.jpg",
+                    "logo": "../icones/dog_toys.png",
                     "seuil": 50,
                     "idcible": 2,
                     "ratio": 2,
@@ -76,7 +76,7 @@ module.exports = {
     "allunlocks": [
         {
             "name": "Nom du premier unlock général",
-            "logo": "../Public/Icones/satan.jpg",
+            "logo": "../icones/satan.png",
             "seuil": 30,
             "idcible": 0,
             "ratio": 2,
@@ -87,7 +87,7 @@ module.exports = {
     "upgrades": [
         {
             "name": "Nom du premier upgrade",
-            "logo": "../Public/Icones/satan.jpg",
+            "logo": "../icones/satan.png",
             "seuil": 1e3,
             "idcible": 1,
             "ratio": 3,
@@ -98,7 +98,7 @@ module.exports = {
     "angelupgrades": [
         {
             "name": "Angel Sacrifice",
-            "logo": "../Public/Icones/satan.jpg",
+            "logo": "../icones/satan.png",
             "seuil": 10,
             "idcible": 0,
             "ratio": 3,
@@ -109,7 +109,7 @@ module.exports = {
     "managers": [
         {
             "name": "Freddy Krueger",
-            "logo": "../Public/Icones/lava.jpg",
+            "logo": "../icones/lava.png",
             "seuil": 10,
             "idcible": 1,
             "ratio": 0,
