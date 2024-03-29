@@ -80,8 +80,8 @@ export class ProduitComponent implements AfterViewInit {
     if(this.enoughtQ){
       this.stateIMG = "clickable";
     }
-    this.initialValue = this.product.vitesse-this.product.timeleft;
-    if (this.product.timeleft != 0 || (this.product.managerUnlocked && !this.run)){
+    if (this.product.timeleft != 0){
+      this.initialValue = this.product.vitesse-this.product.timeleft;
       this.run = true;
     }
   }

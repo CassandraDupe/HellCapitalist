@@ -10,7 +10,7 @@
             </td>
             <td colspan="2" class="vitesse">
                 <!--{{ (product.revenu * product.quantite) / (product.vitesse / 1000) }} $/s-->
-                <app-my-progress-bar [run]="run" [auto]="product.managerUnlocked"
+                <app-my-progress-bar [run]="run || product.managerUnlocked" [auto]="product.managerUnlocked"
                     frontcolor="#008800"
                     backcolor="rgb(100, 181, 63)"
                     [orientation]="orientation" 

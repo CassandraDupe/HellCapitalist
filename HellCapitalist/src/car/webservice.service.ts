@@ -7,12 +7,12 @@ import { Palier, Product } from '../class/World';
   providedIn: 'root'
 })
 export class WebService {
-    server = 'http://localhost:4000/';
+    api = 'http://localhost:4000/'; // Notre Back
     user = '';
-    api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/';
+    // api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/'; // Back du Prof
 
     createClient() {
-        return createClient({ url: this.api+'graphql', //remplacer this.api par this.server pour connection à NOTRE back
+        return createClient({ url: this.api+'graphql',
             exchanges: [fetchExchange],
             fetchOptions: () => {
                 return {

@@ -109,6 +109,7 @@ export class AppComponent {
   constructor(private service: WebService) {
     if(this.username == null || this.username == ""){
       this.username = "Satan"+Math.floor(Math.random() * 10000);
+      localStorage.setItem("username", this.username);
     }
     this.service.user = this.username;
     // ENLEVER LE COMMENTAIRE !!!
