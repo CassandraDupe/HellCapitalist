@@ -59,8 +59,6 @@ module.exports = {
             }
         },
 
-        /// NE MARCHE PAS, SE CONCENTRER DESSUS ///
-        /// RENVOIE UNLOCK = NULL ///
         engagerManager(parent, args, context, info) {
             updateScore(context);
             let managers = context.world.managers;
@@ -83,9 +81,9 @@ module.exports = {
             }
         },
 
-        acheterCashUpgrade(parent, args, context, info) {
-            updateScore(context);
-        }
+        // acheterCashUpgrade(parent, args, context, info) {
+        //     updateScore(context);
+        // }
     }
 }
 
@@ -107,7 +105,7 @@ function condiCalcul(product, elapsetime, context) {
             }
         }
     }
-    let sous = nbrProduit * product.revenu;
+    let sous = nbrProduit * product.revenu * product.quantite;
     context.world.score += sous;
     context.world.money += sous;
 }
