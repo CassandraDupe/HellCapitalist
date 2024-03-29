@@ -80,9 +80,11 @@ export class ProduitComponent implements AfterViewInit {
     if(this.enoughtQ){
       this.stateIMG = "clickable";
     }
-    if (this.product.timeleft != 0){
-      this.initialValue = this.product.vitesse-this.product.timeleft;
-      this.run = true;
+    if (!this.product.timeleft){
+      if (this.product.timeleft != 0){
+        this.initialValue = this.product.vitesse-this.product.timeleft;
+        this.run = true;
+      }
     }
   }
 
@@ -91,7 +93,7 @@ export class ProduitComponent implements AfterViewInit {
   lastUpdate = Date.now();
 
   startFabrication() {
-    if(this.enoughtQ && !this.run){
+    if(this.enoughtQ && !this.run && !this.product.managerUnlocked){
       // ENLEVER LE COMMENTAIRE !!!
       /*this.service.lancerProduction(this.product).catch(reason =>
         console.log("erreur: " + reason)
@@ -123,7 +125,7 @@ export class ProduitComponent implements AfterViewInit {
   run = false;
 
   calcScore (){
-    if(this.run){
+    if(this.run || this.product.managerUnlocked){
       let nProduit = 0;
       // Calcul du temps écoulé depuis la dernière mise à jour
       let elapsetime = Date.now() - this.lastUpdate;

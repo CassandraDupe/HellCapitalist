@@ -65,9 +65,14 @@ export class AppComponent {
     this.affMoney = ""+this.world.money;
     this.valeur = "";
     if(this.world.money>=1000000){
+      this.affMoney = this.affMoney.split(".",2)[0];
       let truc = Math.floor(Math.log(this.world.money) / Math.log(1000));
       this.valeur = this.Illions[truc];
+      console.log("############################");
+      console.log(this.affMoney);
+      console.log("0 à "+(this.affMoney.length-3*truc)+"."+(this.affMoney.length-3*(truc))+" à "+(this.affMoney.length-3*(truc-1)));
       this.affMoney = this.affMoney.substring(0,this.affMoney.length-3*truc)+"."+this.affMoney.substring(this.affMoney.length-3*(truc),this.affMoney.length-3*(truc-1));
+      console.log("=> "+this.affMoney);
     }
   }
 
@@ -102,7 +107,7 @@ export class AppComponent {
 
   affMoney: string | undefined;
   valeur: string | undefined;
-  Illions = ["","","Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion", "Trigintillion", "Quadragintillion", "Quinquagintillion", "Sexagintillion", "Septuagintillion", "Octogintillion", "Nonagintillion", "Centillion", "Ducentillion", "Trucentillion", "Quadringentillion", "Quingentillion", "Sescentillion", "Septingentillion", "Octingentillion", "Nongentillion"]
+  Illions = ["","","Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion", "Trigintillion", "Quadragintillion", "Quinquagintillion", "Sexagintillion", "Septuagintillion", "Octogintillion", "Nonagintillion", "Centillion", "Ducentillion", "Trucentillion", "Quadringentillion", "Quingentillion", "Sescentillion", "Septingentillion", "Octingentillion", "Nongentillion"];
 
   username = localStorage.getItem("username") || "";
 
