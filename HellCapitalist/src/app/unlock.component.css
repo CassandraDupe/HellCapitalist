@@ -1,0 +1,38 @@
+table {
+    display: block;
+    width: 84%;
+    position: relative; left: 8%;
+    /*background-color: rgb(222, 222, 222);*/
+}
+
+.unlIMG img {
+    width: 100%;
+    image-rendering:pixelated;
+}
+
+.unlIMG {
+    width: 25%;
+}
+
+td{
+    text-align: center;
+    border-color: black; border-style: solid;
+    padding: 0%; margin: 0%;
+}
+
+.unlName {
+    font-size: 3vw;
+    color: rgb(71, 161, 203);
+}
+
+.unlRun {
+    font-size: 1.5vw;
+    height: 20%;
+    color: rgb(110, 110, 110);
+}
+
+.unlCout {
+    font-size: 2.5vw;
+    height: 40%;
+    color: rgb(80, 73, 65);
+}

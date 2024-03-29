@@ -1,0 +1,24 @@
+<table>
+    <tbody>
+        <tr>
+            <td class="unlIMG" rowspan="3">
+                <img [src]="api + unl.logo" [alt]="unl.name"/>
+            </td>
+            <td class="unlName">
+                {{ unl.name }}
+            </td>
+        </tr>
+        <tr>
+            <td class="unlCout">
+                {{ unl.seuil }}
+            </td>
+        </tr>
+        @if(unl.idcible!=0){ <!-- il ne s'agit pas d'un allUnlock -->
+            <tr>
+                <td class="unlRun">
+                    {{ prodName + " " + unl.typeratio + " " + "x" + unl.ratio }}
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -29,9 +29,9 @@
           <li class="optionsMenu">
             <button name="man" class="buttonMenu" (click)="openPage(3)">Managers</button> <!--mat-raised-button [matBadge]="badgeManagers" [matBadgeHidden]="badgeManagers==0" Ne marche pas-->
           </li>
-          <li class="optionsMenu">
+          <!--<li class="optionsMenu">
             <button name="inv" class="buttonMenu" (click)="openPage(4)">Investors</button>
-          </li>
+          </li>-->
         </div>
       </td>
       <td id="jeu">
@@ -63,18 +63,33 @@
 @if (display != 0) {
     <button id="close" name="close" (click)="closePage()">❌</button>
     @if (display == 1) {
-      <div class="pages">
-        <h2>Unlocks</h2>
-        <h5>Want to maximize profits? Look no further! Get your investment</h5>
+      <div class="pages unl">
+        <h2 class="unl">Unlocks</h2>
+        <h5 class="unl">Want to maximize profits? Look no further! Get your investments to these quotas to unlock sweet profit bonuses !</h5>
+        <p class="unl">Hire to run your business for you, or to maximize efficiency, all for just one easy payment! SOULS !!!</p>
+        <div class="unl">
+          @for (prod of world.products; track prod.id) {
+            @for (pal of prod.paliers; track (pal.idcible + pal.name)) {
+              @if (!pal.unlocked) {
+                <unlock [params]="{api:api ,unlock:pal, prodName:prod.name}"/>
+              }
+            }
+          }
+          @for (unl of world.allunlocks; track unl.name){
+            @if (!unl.unlocked) {
+              <unlock [params]="{api:api ,unlock:unl}"/>
+            }
+          }
+        </div>
       </div>
     }
     @if (display == 2) {
-      <div class="pages">
-        <h2>Upgrades</h2>
+      <div class="pages upg">
+        <h2 class="upg">Upgrades</h2>
       </div>
     }
     @if (display == 3) {
-      <div class="pages">
+      <div class="pages man">
         <h2 class="man">Managers</h2>
         <h5 class="man">Managers make life easier !</h5>
         <p class="man">Hire to run your business for you, or to maximize efficiency, all for just one easy payment! SOULS !!!</p>
@@ -87,9 +102,9 @@
         </div>
       </div>
     }
-    @if (display == 4) {
+    <!--@if (display == 4) {
       <div class="pages">
         <h2>Investors</h2>
       </div>
-    }
+    }-->
 }

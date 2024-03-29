@@ -42,9 +42,10 @@ export class ManagerComponent {
 
   buy(){
     if(this.enoughtM){
-      this.service.engager(this.man).catch(reason =>
+      // ENLEVER LE COMMENTAIRE !!!
+      /*this.service.engager(this.man).catch(reason =>
         console.log("erreur: " + reason)
-        );
+        );*/
       this.onBuy.emit(this.man);
     }
   }

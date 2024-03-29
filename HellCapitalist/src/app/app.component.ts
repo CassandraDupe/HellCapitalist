@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ProduitComponent } from './produit.component';
 import { ManagerComponent } from './manager.component';
+import { UnlockComponent } from './unlock.component';
 import { WebService } from '../car/webservice.service';
 import { World, Product, Palier } from '../class/World';
 import { bigvalue } from '../class/bigvalue.pipe';
@@ -12,7 +13,7 @@ import { FormsModule } from '@angular/forms';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, ProduitComponent, ManagerComponent, bigvalue, FormsModule]
+    imports: [RouterOutlet, ProduitComponent, ManagerComponent, UnlockComponent, bigvalue, FormsModule]
 })
 export class AppComponent {
   title = "HellCapitalist"
@@ -48,12 +49,13 @@ export class AppComponent {
     } else {
       localStorage.setItem("username", this.username);
       this.service.user = this.username;
-      this.service.getWorld().then(
+      // ENLEVER LE COMMENTAIRE !!!
+      /*this.service.getWorld().then(
         world => {
           this.world = world.data.getWorld;
           this.affichMoney();
         }
-      );
+      );*/
 
       this.connecte = true;
     }
@@ -109,16 +111,18 @@ export class AppComponent {
       this.username = "Satan"+Math.floor(Math.random() * 10000);
     }
     this.service.user = this.username;
-    this.api = service.api;
+    // ENLEVER LE COMMENTAIRE !!!
+    /*this.api = service.api;
     service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
         // console.log(this.world.money);
         this.affichMoney();
       }
-    );
+    );*/
 
-    // this.world = this.getWorldOffLine();
+    this.world = this.getWorldOffLine();
+    this.affichMoney();
   }
 
   getWorldOffLine () {
@@ -145,7 +149,7 @@ export class AppComponent {
         "paliers": [
           {
             "name": "Paper is beautiful !",
-            "logo": "icones/sacpapier.jpg",
+            "logo": "../assets/lava.png",
             "seuil": 20,
             "idcible": 1,
             "ratio": 2,
@@ -154,7 +158,7 @@ export class AppComponent {
           },
           {
             "name": "Don't forget your paper bag  !",
-            "logo": "icones/sacpapier.jpg",
+            "logo": "../assets/lava.png",
             "seuil": 75,
             "idcible": 1,
             "ratio": 2,
@@ -163,7 +167,7 @@ export class AppComponent {
           },
           {
             "name": "Go Paper ! ",
-            "logo": "icones/sacpapier.jpg",
+            "logo": "../assets/lava.png",
             "seuil": 300,
             "idcible": 1,
             "ratio": 2,
@@ -172,7 +176,7 @@ export class AppComponent {
           },
           {
             "name": "Paper Crazy !",
-            "logo": "icones/sacpapier.jpg",
+            "logo": "../assets/lava.png",
             "seuil": 500,
             "idcible": 1,
             "ratio": 2,
@@ -195,7 +199,7 @@ export class AppComponent {
         "paliers": [
           {
             "name": "Give me some good bins !",
-            "logo": "icones/recyclage.jpg",
+            "logo": "../assets/dog_toys.png",
             "seuil": 20,
             "idcible": 2,
             "ratio": 2,
@@ -204,7 +208,7 @@ export class AppComponent {
           },
           {
             "name": "My Trashcans are better than yours ! ",
-            "logo": "icones/recyclage.jpg",
+            "logo": "../assets/dog_toys.png",
             "seuil": 75,
             "idcible": 2,
             "ratio": 2,
@@ -213,7 +217,7 @@ export class AppComponent {
           },
           {
             "name": "Recycle or die ! ",
-            "logo": "icones/recyclage.jpg",
+            "logo": "../assets/dog_toys.png",
             "seuil": 300,
             "idcible": 2,
             "ratio": 2,
@@ -222,7 +226,7 @@ export class AppComponent {
           },
           {
             "name": "Bins are getting mad !",
-            "logo": "icones/recyclage.jpg",
+            "logo": "../assets/dog_toys.png",
             "seuil": 500,
             "idcible": 2,
             "ratio": 2,
@@ -245,7 +249,7 @@ export class AppComponent {
         "paliers": [
           {
             "name": "More Bicycles !",
-            "logo": "icones/velo.jpg",
+            "logo": "../assets/scream_and_despair.png",
             "seuil": 20,
             "idcible": 3,
             "ratio": 2,
@@ -254,7 +258,7 @@ export class AppComponent {
           },
           {
             "name": "More More Bicycles !",
-            "logo": "icones/velo.jpg",
+            "logo": "../assets/scream_and_despair.png",
             "seuil": 75,
             "idcible": 3,
             "ratio": 2,
@@ -263,7 +267,7 @@ export class AppComponent {
           },
           {
             "name": "Bicycles will rule the world ! ",
-            "logo": "icones/photo.jpg",
+            "logo": "../assets/scream_and_despair.png",
             "seuil": 300,
             "idcible": 3,
             "ratio": 2,
@@ -272,7 +276,7 @@ export class AppComponent {
           },
           {
             "name": "Bicycles, what else ?",
-            "logo": "icones/velo.jpg",
+            "logo": "../assets/scream_and_despair.png",
             "seuil": 500,
             "idcible": 3,
             "ratio": 2,
@@ -295,7 +299,7 @@ export class AppComponent {
         "paliers": [
           {
             "name": "These cars are wizzzzzz !",
-            "logo": "icones/voitureelec.jpg",
+            "logo": "../assets/flesh_and_bone.png",
             "seuil": 20,
             "idcible": 4,
             "ratio": 2,
@@ -304,7 +308,7 @@ export class AppComponent {
           },
           {
             "name": "Dont't be afraid by my cars !",
-            "logo": "icones/voitureelec.jpg",
+            "logo": "../assets/flesh_and_bone.png",
             "seuil": 75,
             "idcible": 4,
             "ratio": 2,
@@ -313,7 +317,7 @@ export class AppComponent {
           },
           {
             "name": "Electricity forever ! ",
-            "logo": "icones/voitureelec.jpg",
+            "logo": "../assets/flesh_and_bone.png",
             "seuil": 300,
             "idcible": 4,
             "ratio": 2,
@@ -322,7 +326,7 @@ export class AppComponent {
           },
           {
             "name": "I like to drive !",
-            "logo": "icones/voitureelec.jpg",
+            "logo": "../assets/flesh_and_bone.png",
             "seuil": 500,
             "idcible": 4,
             "ratio": 2,
@@ -345,7 +349,7 @@ export class AppComponent {
         "paliers": [
           {
             "name": "I feel like the wind !",
-            "logo": "icones/eolienne.jpg",
+            "logo": "../assets/torture_machine.png",
             "seuil": 20,
             "idcible": 5,
             "ratio": 2,
@@ -354,7 +358,7 @@ export class AppComponent {
           },
           {
             "name": "Give me more wind !",
-            "logo": "icones/velo.jpg",
+            "logo": "../assets/torture_machine.png",
             "seuil": 75,
             "idcible": 4,
             "ratio": 2,
@@ -363,7 +367,7 @@ export class AppComponent {
           },
           {
             "name": "There is nothing like the wind ! ",
-            "logo": "icones/photo.jpg",
+            "logo": "../assets/torture_machine.png",
             "seuil": 300,
             "idcible": 4,
             "ratio": 2,
@@ -372,7 +376,7 @@ export class AppComponent {
           },
           {
             "name": "Ride the wild wind !",
-            "logo": "icones/velo.jpg",
+            "logo": "../assets/torture_machine.png",
             "seuil": 500,
             "idcible": 4,
             "ratio": 2,
@@ -395,7 +399,7 @@ export class AppComponent {
         "paliers": [
           {
             "name": "Let's the sun shining ! ",
-            "logo": "icones/solar.jpg",
+            "logo": "../assets/maths_lessons.png",
             "seuil": 20,
             "idcible": 6,
             "ratio": 2,
@@ -404,7 +408,7 @@ export class AppComponent {
           },
           {
             "name": "I feel the power of the sun !",
-            "logo": "icones/solar.jpg",
+            "logo": "../assets/maths_lessons.png",
             "seuil": 75,
             "idcible": 6,
             "ratio": 2,
@@ -413,7 +417,7 @@ export class AppComponent {
           },
           {
             "name": "It's hot ! ",
-            "logo": "icones/photo.jpg",
+            "logo": "../assets/maths_lessons.png",
             "seuil": 300,
             "idcible": 6,
             "ratio": 2,
@@ -422,7 +426,7 @@ export class AppComponent {
           },
           {
             "name": "Oh my god, we can't stop it !",
-            "logo": "icones/velo.jpg",
+            "logo": "../assets/maths_lessons.png",
             "seuil": 500,
             "idcible": 6,
             "ratio": 2,
@@ -435,7 +439,7 @@ export class AppComponent {
     "allunlocks": [
       {
         "name": "All is better than one",
-        "logo": "icones/all.jpg",
+        "logo": "../assets/satan.png",
         "seuil": 30,
         "idcible": 0,
         "ratio": 2,
@@ -444,7 +448,7 @@ export class AppComponent {
       },
       {
         "name": "To take and not to give",
-        "logo": "icones/all.jpg",
+        "logo": "../assets/satan.png",
         "seuil": 150,
         "idcible": 0,
         "ratio": 3,
@@ -453,7 +457,7 @@ export class AppComponent {
       },
       {
         "name": "Take it all !",
-        "logo": "icones/all.jpg",
+        "logo": "../assets/satan.png",
         "seuil": 375,
         "idcible": 0,
         "ratio": 3,
@@ -462,7 +466,7 @@ export class AppComponent {
       },
       {
         "name": "To infinite and beyond !",
-        "logo": "icones/all.jpg",
+        "logo": "../assets/satan.png",
         "seuil": 500,
         "idcible": 0,
         "ratio": 3,

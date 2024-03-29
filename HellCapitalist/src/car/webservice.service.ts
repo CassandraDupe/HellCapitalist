@@ -12,7 +12,7 @@ export class WebService {
     api = 'https://isiscapitalistgraphql.kk.kurasawa.fr/';
 
     createClient() {
-        return createClient({ url: this.api+'graphql',
+        return createClient({ url: this.api+'graphql', //remplacer this.api par this.server pour connection à NOTRE back
             exchanges: [fetchExchange],
             fetchOptions: () => {
                 return {

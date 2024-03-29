@@ -92,9 +92,10 @@ export class ProduitComponent implements AfterViewInit {
 
   startFabrication() {
     if(this.enoughtQ && !this.run){
-      this.service.lancerProduction(this.product).catch(reason =>
+      // ENLEVER LE COMMENTAIRE !!!
+      /*this.service.lancerProduction(this.product).catch(reason =>
         console.log("erreur: " + reason)
-        );
+        );*/
       this.product.timeleft = this.product.vitesse;
       this.lastUpdate = Date.now();
       this.run = true;
@@ -155,9 +156,10 @@ export class ProduitComponent implements AfterViewInit {
 
   buy(){
     if(this.enoughtM){
-      this.service.acheterQt(this.product, this.achat).catch(reason =>
+      // ENLEVER LE COMMENTAIRE !!!
+      /*this.service.acheterQt(this.product, this.achat).catch(reason =>
         console.log("erreur: " + reason)
-        );
+        );*/
       this.onBuy.emit(this.cout);
       this.product.quantite = this.product.quantite + this.achat;
       this.product.cout = this.product.cout * Math.pow(this.product.croissance,this.achat+1);

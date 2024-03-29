@@ -114,7 +114,6 @@ button#close {
     overflow:scroll;
     width: 74%; height: 90vh;
     position: fixed; left: 13%; bottom:0vh;
-    background-color: rgb(206, 206, 206);
     border-top-left-radius: 3vh; border-top-right-radius: 3vh;
     /*border-color: rgb(222, 222, 222); border-style: solid;*/
 }
@@ -122,20 +121,59 @@ button#close {
 .pages h2 {
     position: relative; bottom: 5vh; left: 30%;
     width: 40%; border-radius: 1vw;
-    background-color: rgb(158, 189, 207);
     font-size: 4vw; color: aliceblue; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .pages h5 {
-    font-size: 2vw; color: rgb(62, 100, 121);
+    font-size: 2vw;
 }
 
 /* PAGE UNLOCKS*/
+.pages.unl {
+    background-color: rgb(221, 207, 181);
+}
 
-/* PAGE UPGRADES*/
+.pages h2.unl{
+    background-color: rgb(227, 173, 64);
+}
 
-/* PAGE MANAGERS*/
-.man {
+.pages h5.unl{
+    color: rgb(62, 54, 48);
+}
+
+:not(.pages).unl {
     position: relative; bottom: 10vh;
 }
-/* PAGE INVESTORS*/
+/* PAGE UPGRADES*/
+.pages.upg {
+    background-color: rgb(222, 196, 181);
+}
+
+.pages h2.upg{
+    background-color: rgb(224, 134, 74);
+}
+
+.pages h5.upg{
+    color: rgb(168, 83, 31);
+}
+
+:not(.pages).upg {
+    position: relative; bottom: 10vh;
+}
+
+/* PAGE MANAGERS*/
+.pages.man {
+    background-color: rgb(206, 206, 206);
+}
+
+.pages h2.man{
+    background-color: rgb(158, 189, 207);
+}
+
+.pages h5.man{
+    color: rgb(62, 100, 121);
+}
+
+:not(.pages).man {
+    position: relative; bottom: 10vh;
+}
