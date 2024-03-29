@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 async function readUserWorld(user) {
     try {
-        const data = await fs.readFile("userworlds/"+ user + "-world.json");
+        const data = await fs.readFile("../userworlds/"+ user + "-world.json");
         return JSON.parse(data);
     }
     catch(error) {
