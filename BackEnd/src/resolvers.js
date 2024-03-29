@@ -2,7 +2,7 @@ const {lastupdate} = require("./world");
 
 function saveWorld(context) {
     const fs = require('fs');
-    fs.writeFile("userworlds/" + context.user + "-world.json",
+    fs.writeFile("../userworlds/" + context.user + "-world.json",
         JSON.stringify(context.world), err => {
             if (err) {
                 console.error(err)
