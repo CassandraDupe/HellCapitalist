@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createClient, fetchExchange } from '@urql/core';
-import { ACHETER_QT, ENGAGER, GET_WORLD, LANCER_PRODUCTION } from './Grapqhrequests'
+import { ACHETER_QT, ENGAGER, GET_WORLD, LANCER_PRODUCTION, UPGRADER } from './Grapqhrequests'
 import { Palier, Product } from '../class/World';
 
 @Injectable({
@@ -36,5 +36,9 @@ export class WebService {
 
     engager(manager: Palier) {
         return this.createClient().mutation(ENGAGER, { name:manager.name}).toPromise();
+    }
+
+    upgrader(upgrade: Palier) {
+        return this.createClient().mutation(UPGRADER, { name:upgrade.name}).toPromise();
     }
 }

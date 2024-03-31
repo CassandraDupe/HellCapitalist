@@ -86,6 +86,15 @@
     @if (display == 2) {
       <div class="pages upg">
         <h2 class="upg">Upgrades</h2>
+        <h5 class="upg">You gotta spend money to make money!</h5>
+        <p class="upg">Purchase these fine quality upgrades to give your businesses a boost.</p>
+        <div class="upg">
+          @for (upg of world.upgrades; track upg.idcible) {
+            @if (!upg.unlocked) {
+              <upgrade [params]="{api:api ,upgrade:upg, products: world.products, money: world.money}"  (onBuy)="onBuyUpg($event)"/>
+            }
+          }
+        </div>
       </div>
     }
     @if (display == 3) {
@@ -103,8 +112,10 @@
       </div>
     }
     @if (display == 4) {
-      <div class="pages">
-        <h2>Investors</h2>
+      <div class="pages inv">
+        <h2 class="inv">Investors</h2>
+        <h5 class="inv">Your devotion to hell pay profits in your future lifes</h5>
+        <p class="inv">The more money you earn, the more Demons Investors you can attract!<br/>These blokes increase profits and unlock new upgrades, but you'll need to sell your businesses and start over to bring'em on board. (Psst! It's worth it!)</p>
       </div>
     }
 }

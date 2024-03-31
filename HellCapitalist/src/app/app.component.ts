@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { ProduitComponent } from './produit.component';
 import { ManagerComponent } from './manager.component';
 import { UnlockComponent } from './unlock.component';
+import { UpgradeComponent } from './upgrade.component';
 import { WebService } from '../car/webservice.service';
 import { World, Product, Palier } from '../class/World';
 import { bigvalue } from '../class/bigvalue.pipe';
@@ -13,7 +14,7 @@ import { FormsModule } from '@angular/forms';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, ProduitComponent, ManagerComponent, UnlockComponent, bigvalue, FormsModule]
+    imports: [RouterOutlet, ProduitComponent, ManagerComponent, UnlockComponent, UpgradeComponent, bigvalue, FormsModule]
 })
 export class AppComponent {
   title = "HellCapitalist"
@@ -157,6 +158,42 @@ export class AppComponent {
 
     // ENLEVER LE COMMENTAIRE !!!
     /*this.service.engager(man).catch(reason =>
+      console.log("erreur: " + reason)
+    );*/
+  }
+
+  onBuyUpg(upg: Palier){
+    this.world.money = this.world.money - upg.seuil;
+
+    this.world.upgrades.forEach(worldUpg => {
+      if(!worldUpg.unlocked && (worldUpg.name == upg.name) && (worldUpg.idcible == upg.idcible)){ // On doit faire plein de vérification car les upgrades n'ont pas d'ID unique :(
+        worldUpg.unlocked = true;
+      }
+    });
+
+    if (upg.idcible != 0){
+      if (upg.typeratio == "gain"){
+        this.world.products[upg.idcible-1].revenu *= upg.ratio;
+      }
+      if (upg.typeratio == "vitesse"){
+        this.world.products[upg.idcible-1].revenu /= upg.ratio;
+      }
+    }
+    else {
+      this.world.products.forEach(prod => {
+        if (upg.typeratio == "gain"){
+          prod.revenu *= upg.ratio;
+        }
+        if (upg.typeratio == "vitesse"){
+          prod.revenu /= upg.ratio;
+        }
+      });
+    }
+    
+    this.affichMoney();
+
+    // ENLEVER LE COMMENTAIRE !!!
+    /*this.service.upgrader(upg).catch(reason =>
       console.log("erreur: " + reason)
     );*/
   }
@@ -542,7 +579,7 @@ export class AppComponent {
     "upgrades": [
       {
         "name": "Do you like paper bag ?",
-        "logo": "icones/sacpapier.jpg",
+        "logo": "../assets/lava.png",
         "seuil": 1000,
         "idcible": 1,
         "ratio": 3,
@@ -551,7 +588,7 @@ export class AppComponent {
       },
       {
         "name": "This is my bin",
-        "logo": "icones/recyclage.jpg",
+        "logo": "../assets/dog_toys.png",
         "seuil": 15000,
         "idcible": 2,
         "ratio": 3,
@@ -560,7 +597,7 @@ export class AppComponent {
       },
       {
         "name": "A nice bicycle",
-        "logo": "icones/velo.jpg",
+        "logo": "../assets/scream_and_despair.png",
         "seuil": 15000,
         "idcible": 3,
         "ratio": 3,
@@ -569,7 +606,7 @@ export class AppComponent {
       },
       {
         "name": "I want this car !",
-        "logo": "icones/voitureelec.jpg",
+        "logo": "../assets/flesh_and_bone.png",
         "seuil": 100000,
         "idcible": 4,
         "ratio": 3,
@@ -578,7 +615,7 @@ export class AppComponent {
       },
       {
         "name": "Don't laugh ! Just buy ! ",
-        "logo": "icones/eolienne.jpg",
+        "logo": "../assets/torture_machine.png",
         "seuil": 200000,
         "idcible": 5,
         "ratio": 3,
@@ -587,7 +624,7 @@ export class AppComponent {
       },
       {
         "name": "A big advance",
-        "logo": "icones/solar.jpg",
+        "logo": "../assets/maths_lessons.png",
         "seuil": 3000000,
         "idcible": 6,
         "ratio": 3,
@@ -596,7 +633,7 @@ export class AppComponent {
       },
       {
         "name": "I want it all !",
-        "logo": "icones/all.jpg",
+        "logo": "../assets/satan.png",
         "seuil": 3500000,
         "idcible": 0,
         "ratio": 3,
@@ -605,7 +642,7 @@ export class AppComponent {
       },
       {
         "name": "Why do you look a my bag ?",
-        "logo": "icones/sacpapier.jpg",
+        "logo": "../assets/lava.png",
         "seuil": 4000000,
         "idcible": 1,
         "ratio": 3,
@@ -614,7 +651,7 @@ export class AppComponent {
       },
       {
         "name": "The same bin as my mum.",
-        "logo": "icones/recyclage.jpg",
+        "logo": "../assets/dog_toys.png",
         "seuil": 6000000,
         "idcible": 2,
         "ratio": 3,
@@ -623,7 +660,7 @@ export class AppComponent {
       },
       {
         "name": "My bicycle goes fast.",
-        "logo": "icones/velo.jpg",
+        "logo": "../assets/scream_and_despair.png",
         "seuil": 10000000,
         "idcible": 3,
         "ratio": 3,
@@ -632,7 +669,7 @@ export class AppComponent {
       },
       {
         "name": "No more oil",
-        "logo": "icones/voitureelec.jpg",
+        "logo": "../assets/flesh_and_bone.png",
         "seuil": 20000000,
         "idcible": 4,
         "ratio": 3,
@@ -641,7 +678,7 @@ export class AppComponent {
       },
       {
         "name": "It's blowing too fast!",
-        "logo": "icones/eolienne.jpg",
+        "logo": "../assets/torture_machine.png",
         "seuil": 50000000,
         "idcible": 5,
         "ratio": 3,
@@ -650,7 +687,7 @@ export class AppComponent {
       },
       {
         "name": "Clouds go away !",
-        "logo": "icones/solar.jpg",
+        "logo": "../assets/maths_lessons.png",
         "seuil": 100000000,
         "idcible": 6,
         "ratio": 3,
@@ -659,7 +696,7 @@ export class AppComponent {
       },
       {
         "name": "Bingo !",
-        "logo": "icones/all.jpg",
+        "logo": "../assets/satan.png",
         "seuil": 500000000,
         "idcible": 0,
         "ratio": 3,

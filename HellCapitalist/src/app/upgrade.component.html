@@ -1,0 +1,34 @@
+<table>
+    <tbody>
+        <tr>
+            <td class="upgIMG" rowspan="3">
+                <img [src]="api + upg.logo" [alt]="upg.name"/>
+            </td>
+            <td class="upgName">
+                {{ upg.name }}
+            </td>
+            <td rowspan="3" class="upgBuy">
+                <button [class]="clickUpg" name="buy" (click)="buy()">Buy!</button>
+            </td>
+        </tr>
+        @if(upg.idcible!=0){ <!-- il ne s'agit pas d'un allUnlock -->
+            <tr>
+                <td class="upgRun">
+                    {{ prods[upg.idcible - 1].name + " " + upg.typeratio.toUpperCase() + " " + "x" + upg.ratio }}
+                </td>
+            </tr>
+        }
+        @else {
+            <tr>
+                <td class="upgRun">
+                    {{ "All Products " + upg.typeratio.toUpperCase() + " " + "x" + upg.ratio }}
+                </td>
+            </tr>
+        }
+        <tr>
+            <td class="upgCout">
+                {{ affSeuil + " " + valeur }}
+            </td>
+        </tr>
+    </tbody>
+</table>

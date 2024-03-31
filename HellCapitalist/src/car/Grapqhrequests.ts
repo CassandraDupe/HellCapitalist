@@ -72,23 +72,30 @@ const GET_WORLD = gql`
         }
     }`;
 
-    export const LANCER_PRODUCTION = gql`
-        mutation lancerProductionProduit($id: Int!) {
-            lancerProductionProduit(id: $id) {
-                id
-            }
-        }`;
+export const LANCER_PRODUCTION = gql`
+    mutation lancerProductionProduit($id: Int!) {
+        lancerProductionProduit(id: $id) {
+            id
+        }
+    }`;
 
-    export const ACHETER_QT = gql`
-        mutation acheterQtProduit($id: Int!, $quantite: Int!) {
-            acheterQtProduit(id: $id, quantite: $quantite) {
-                id, quantite
-            }
-        }`;
+export const ACHETER_QT = gql`
+    mutation acheterQtProduit($id: Int!, $quantite: Int!) {
+        acheterQtProduit(id: $id, quantite: $quantite) {
+            id, quantite
+        }
+    }`;
 
-    export const ENGAGER = gql`
-        mutation engagerManager($name: String!) {
-            engagerManager(name: $name) {
-                name
-            }
-        }`;
+export const ENGAGER = gql`
+    mutation engagerManager($name: String!) {
+        engagerManager(name: $name) {
+            name
+        }
+    }`;
+
+export const UPGRADER = gql`
+    mutation acheterCashUpgrade($name: String!) {
+        acheterCashUpgrade(name: $name) {
+            name
+        }
+    }`;
