@@ -104,6 +104,35 @@ export class AppComponent {
 
     this.world.products[event.prod.id-1] = updatedProduct;
 
+    // Maintenant on vérifie pour les allUnlocks
+    let nbTotProd = 0;
+    this.world.products.forEach(prod => {
+      nbTotProd += prod.quantite;
+    });
+
+    this.world.allunlocks.forEach(pal => {
+      if(!pal.unlocked && (nbTotProd >= pal.seuil)){
+        pal.unlocked = true;
+        if(pal.typeratio == "gain"){
+          this.world.products.forEach(prod => {
+            // Pas besoin de remplacer le produit complet, ça marche comme ça (en faisant moins de calculs)
+            /*updatedProduct = {...prod};
+            updatedProduct.revenu = updatedProduct.revenu * pal.ratio;
+            this.world.products[updatedProduct.id-1] = updatedProduct;*/
+            prod.revenu = prod.revenu * pal.ratio;
+          });
+        }
+        if(pal.typeratio == "vitesse"){
+          this.world.products.forEach(prod => {
+            /*updatedProduct = {...prod};
+            updatedProduct.vitesse = updatedProduct.vitesse / pal.ratio;
+            this.world.products[updatedProduct.id-1] = updatedProduct;*/
+            prod.vitesse = prod.vitesse / pal.ratio;
+          });
+        }
+      }
+    });
+
     this.world.money = this.world.money - (event.cout);
     this.affichMoney();
 
