@@ -126,6 +126,7 @@ button#close {
 
 .pages h5 {
     font-size: 2vw;
+    width: 90%; left: 5%;
 }
 
 /* PAGE UNLOCKS*/
@@ -144,6 +145,7 @@ button#close {
 :not(.pages).unl {
     position: relative; bottom: 10vh;
 }
+
 /* PAGE UPGRADES*/
 .pages.upg {
     background-color: rgb(222, 196, 181);
@@ -177,3 +179,5 @@ button#close {
 :not(.pages).man {
     position: relative; bottom: 10vh;
 }
+
+/* PAGE INVESTORS*/

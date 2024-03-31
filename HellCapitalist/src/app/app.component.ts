@@ -68,11 +68,11 @@ export class AppComponent {
       this.affMoney = this.affMoney.split(".",2)[0];
       let truc = Math.floor(Math.log(this.world.money) / Math.log(1000));
       this.valeur = this.Illions[truc];
-      console.log("############################");
-      console.log(this.affMoney);
-      console.log("0 à "+(this.affMoney.length-3*truc)+"."+(this.affMoney.length-3*(truc))+" à "+(this.affMoney.length-3*(truc-1)));
+      // console.log("############################");
+      // console.log(this.affMoney);
+      // console.log("0 à "+(this.affMoney.length-3*truc)+"."+(this.affMoney.length-3*(truc))+" à "+(this.affMoney.length-3*(truc-1)));
       this.affMoney = this.affMoney.substring(0,this.affMoney.length-3*truc)+"."+this.affMoney.substring(this.affMoney.length-3*(truc),this.affMoney.length-3*(truc-1));
-      console.log("=> "+this.affMoney);
+      // console.log("=> "+this.affMoney);
     }
   }
 
@@ -82,10 +82,35 @@ export class AppComponent {
     this.affichMoney();
   }
 
-  onBuyProd(n: number){
-    this.world.money = this.world.money - n;
+  onBuyProd(event: any){
+    let updatedProduct = {...this.world.products[event.prod.id-1]};
+
+    updatedProduct.quantite = updatedProduct.quantite + event.nbBuy;
+    updatedProduct.cout = updatedProduct.cout * Math.pow(updatedProduct.croissance,event.nbBuy+1);
     
+    updatedProduct.paliers.forEach(pal => {
+      if(!pal.unlocked && (updatedProduct.quantite >= pal.seuil)){
+        pal.unlocked = true;
+        if(pal.typeratio == "gain"){
+          updatedProduct.revenu = updatedProduct.revenu * pal.ratio;
+        }
+        if(pal.typeratio == "vitesse"){
+          updatedProduct.vitesse = updatedProduct.vitesse / pal.ratio;
+        }
+      }
+    });
+
+    // console.log(updatedProduct);
+
+    this.world.products[event.prod.id-1] = updatedProduct;
+
+    this.world.money = this.world.money - (event.cout);
     this.affichMoney();
+
+    // ENLEVER LE COMMENTAIRE !!!
+    /*this.service.acheterQt(event.prod, event.nbBuy).catch(reason =>
+      console.log("erreur: " + reason)
+    );*/
   }
 
   // badgeManagers = 0; // Ne marche pas
@@ -100,6 +125,11 @@ export class AppComponent {
     this.world.products[man.idcible-1] = updatedProduct;
     
     this.affichMoney();
+
+    // ENLEVER LE COMMENTAIRE !!!
+    /*this.service.engager(man).catch(reason =>
+      console.log("erreur: " + reason)
+    );*/
   }
 
   api = '';

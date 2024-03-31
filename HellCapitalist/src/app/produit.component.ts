@@ -15,7 +15,7 @@ import { WebService } from '../car/webservice.service';
 })
 export class ProduitComponent implements AfterViewInit {
   @Output() refresh: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onBuy: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onBuy: EventEmitter<any> = new EventEmitter<any>();
 
   product!: Product;
   seu: number | undefined; // Prochain seuil (undefined si il n'y a pas de prochain seuil)
@@ -158,15 +158,7 @@ export class ProduitComponent implements AfterViewInit {
 
   buy(){
     if(this.enoughtM){
-      // ENLEVER LE COMMENTAIRE !!!
-      /*this.service.acheterQt(this.product, this.achat).catch(reason =>
-        console.log("erreur: " + reason)
-        );*/
-      this.onBuy.emit(this.cout);
-      this.product.quantite = this.product.quantite + this.achat;
-      this.product.cout = this.product.cout * Math.pow(this.product.croissance,this.achat+1);
-      this.affichCout();
-      this.seu = this.product.paliers.find(elem => elem.unlocked == false)?.seuil;
+      this.onBuy.emit({"nbBuy" : this.achat, "prod" : this.product, "cout" : this.cout});
     }
   }
 }
