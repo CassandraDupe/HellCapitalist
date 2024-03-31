@@ -1,7 +1,6 @@
 module.exports = {
     "name": "Hell Capitalist",
     "logo": "icones/logomonde.png",
-    "logo": "icones/logomonde.png",
     "money": 0,
     "score": 0,
     "totalangels": 0,
@@ -12,7 +11,6 @@ module.exports = {
         {
             "id": 1,
             "name": "Lava",
-            "logo": "../icones/lava.png",
             "logo": "../icones/lava.png",
             "cout": 4,
             "croissance": 1.07,
@@ -25,7 +23,6 @@ module.exports = {
                 {
                     "name": "Premier palier",
                     "logo": "../icones/lava.png",
-                    "logo": "../icones/lava.png",
                     "seuil": 25,
                     "idcible": 1,
                     "ratio": 2,
@@ -34,7 +31,6 @@ module.exports = {
                 },
                 {
                     "name": "Deuxième palier",
-                    "logo": "../icones/lava.png",
                     "logo": "../icones/lava.png",
                     "seuil": 50,
                     "idcible": 1,
@@ -48,12 +44,11 @@ module.exports = {
             "id": 2,
             "name": "Dog toys",
             "logo": "../icones/dog_toys.png",
-            "logo": "../icones/dog_toys.png",
-            "cout": 16,
+            "cout": 20,
             "croissance": 1.2,
-            "revenu": 7,
+            "revenu": 9,
             "vitesse": 3000,
-            "quantite": 1,
+            "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
@@ -63,7 +58,7 @@ module.exports = {
                     "seuil": 25,
                     "idcible": 2,
                     "ratio": 2,
-                    "typeratio": "vitesse",
+                    "typeratio": "gain",
                     "unlocked": false
                 },
                 {
@@ -71,8 +66,8 @@ module.exports = {
                     "logo": "../icones/dog_toys.png",
                     "seuil": 50,
                     "idcible": 2,
-                    "ratio": 2,
-                    "typeratio": "gain",
+                    "ratio": 3,
+                    "typeratio": "vitesse",
                     "unlocked": false
                 }
             ]
@@ -81,11 +76,11 @@ module.exports = {
             "id": 3,
             "name": "Scream and despair",
             "logo": "../icones/scream_and_despair.png",
-            "cout": 16,
-            "croissance": 1.2,
-            "revenu": 7,
-            "vitesse": 3000,
-            "quantite": 1,
+            "cout": 100,
+            "croissance": 1.5,
+            "revenu": 45,
+            "vitesse": 25000,
+            "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
@@ -93,8 +88,8 @@ module.exports = {
                     "name": "Premier palier",
                     "logo": "../icones/scream_and_despair.png",
                     "seuil": 25,
-                    "idcible": 2,
-                    "ratio": 2,
+                    "idcible": 3,
+                    "ratio": 3,
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
@@ -102,9 +97,9 @@ module.exports = {
                     "name": "Deuxième palier",
                     "logo": "../icones/scream_and_despair.png",
                     "seuil": 50,
-                    "idcible": 2,
-                    "ratio": 2,
-                    "typeratio": "gain",
+                    "idcible": 3,
+                    "ratio": 2.5,
+                    "typeratio": "vitesse",
                     "unlocked": false
                 }
             ]
@@ -113,11 +108,11 @@ module.exports = {
             "id": 4,
             "name": "Flesh and bone",
             "logo": "../icones/flesh_and_bone.png",
-            "cout": 16,
-            "croissance": 1.2,
-            "revenu": 7,
-            "vitesse": 3000,
-            "quantite": 1,
+            "cout": 500,
+            "croissance": 2.1,
+            "revenu": 270,
+            "vitesse": 100000,
+            "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
@@ -125,18 +120,18 @@ module.exports = {
                     "name": "Premier palier",
                     "logo": "../icones/flesh_and_bone.png",
                     "seuil": 25,
-                    "idcible": 2,
-                    "ratio": 2,
-                    "typeratio": "vitesse",
+                    "idcible": 4,
+                    "ratio": 3.2,
+                    "typeratio": "gain",
                     "unlocked": false
                 },
                 {
                     "name": "Deuxième palier",
                     "logo": "../icones/flesh_and_bone.png",
                     "seuil": 50,
-                    "idcible": 2,
-                    "ratio": 2,
-                    "typeratio": "gain",
+                    "idcible": 4,
+                    "ratio": 4,
+                    "typeratio": "vitesse",
                     "unlocked": false
                 }
             ]
@@ -145,11 +140,11 @@ module.exports = {
             "id": 5,
             "name": "Torture machine",
             "logo": "../icones/torture_machine.png",
-            "cout": 16,
-            "croissance": 1.2,
-            "revenu": 7,
-            "vitesse": 3000,
-            "quantite": 1,
+            "cout": 3000,
+            "croissance": 2.8,
+            "revenu": 1300,
+            "vitesse": 4500000,
+            "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
@@ -157,8 +152,8 @@ module.exports = {
                     "name": "Premier palier",
                     "logo": "../icones/torture_machine.png",
                     "seuil": 25,
-                    "idcible": 2,
-                    "ratio": 2,
+                    "idcible": 5,
+                    "ratio": 6,
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
@@ -166,8 +161,8 @@ module.exports = {
                     "name": "Deuxième palier",
                     "logo": "../icones/torture_machine.png",
                     "seuil": 50,
-                    "idcible": 2,
-                    "ratio": 2,
+                    "idcible": 5,
+                    "ratio": 4,
                     "typeratio": "gain",
                     "unlocked": false
                 }
@@ -177,32 +172,30 @@ module.exports = {
             "id": 6,
             "name": "Maths lessons",
             "logo": "../icones/maths_lessons.png",
-            "cout": 16,
-            "croissance": 1.2,
-            "revenu": 7,
-            "vitesse": 3000,
-            "quantite": 1,
+            "cout": 10000,
+            "croissance": 5,
+            "revenu": 800,
+            "vitesse": 12000000,
+            "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
                 {
                     "name": "Premier palier",
-                    "logo": "../icones/dog_toys.png",
                     "logo": "../icones/maths_lessons.png",
                     "seuil": 25,
-                    "idcible": 2,
-                    "ratio": 2,
-                    "typeratio": "vitesse",
+                    "idcible": 6,
+                    "ratio": 5,
+                    "typeratio": "gain",
                     "unlocked": false
                 },
                 {
                     "name": "Deuxième palier",
-                    "logo": "../icones/dog_toys.png",
                     "logo": "../icones/maths_lessons.png",
                     "seuil": 50,
-                    "idcible": 2,
-                    "ratio": 2,
-                    "typeratio": "gain",
+                    "idcible": 6,
+                    "ratio": 8,
+                    "typeratio": "vitesse",
                     "unlocked": false
                 }
             ]
@@ -211,7 +204,6 @@ module.exports = {
     "allunlocks": [
         {
             "name": "Nom du premier unlock général",
-            "logo": "../icones/satan.png",
             "logo": "../icones/satan.png",
             "seuil": 30,
             "idcible": 0,
@@ -224,7 +216,6 @@ module.exports = {
         {
             "name": "Nom du premier upgrade",
             "logo": "../icones/satan.png",
-            "logo": "../icones/satan.png",
             "seuil": 1e3,
             "idcible": 1,
             "ratio": 3,
@@ -236,7 +227,6 @@ module.exports = {
         {
             "name": "Angel Sacrifice",
             "logo": "../icones/satan.png",
-            "logo": "../icones/satan.png",
             "seuil": 10,
             "idcible": 0,
             "ratio": 3,
@@ -247,7 +237,6 @@ module.exports = {
     "managers": [
         {
             "name": "Freddy Krueger",
-            "logo": "../icones/lava.png",
             "logo": "../icones/Freddy_Krueger.png",
             "seuil": 10,
             "idcible": 1,
