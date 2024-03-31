@@ -49,8 +49,7 @@ export class ProduitComponent implements AfterViewInit {
     if(this.multiplicateur == "MAX"){
       this.achat = Math.floor(Math.log(1-((this.totMoney*(1-this.product.croissance))/this.product.cout)) / Math.log(this.product.croissance)); // calcMaxCanBuy
     }
-    this.cout = Math.floor(
-    this.product.cout*((1-Math.pow(this.product.croissance,this.achat))/(1-this.product.croissance)));
+    this.cout = Math.floor(this.product.cout*((1-Math.pow(this.product.croissance,this.achat))/(1-this.product.croissance)));
     this.affCout = ""+this.cout;
     this.valeur = "";
     if(this.cout>=1000000){

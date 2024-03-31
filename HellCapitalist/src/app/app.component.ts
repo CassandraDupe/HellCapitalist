@@ -86,8 +86,8 @@ export class AppComponent {
   onBuyProd(event: any){
     let updatedProduct = {...this.world.products[event.prod.id-1]};
 
-    updatedProduct.quantite = updatedProduct.quantite + event.nbBuy;
-    updatedProduct.cout = updatedProduct.cout * Math.pow(updatedProduct.croissance,event.nbBuy+1);
+    updatedProduct.quantite += event.nbBuy;
+    updatedProduct.cout = updatedProduct.cout * Math.pow(updatedProduct.croissance,event.nbBuy);
     
     updatedProduct.paliers.forEach(pal => {
       if(!pal.unlocked && (updatedProduct.quantite >= pal.seuil)){
