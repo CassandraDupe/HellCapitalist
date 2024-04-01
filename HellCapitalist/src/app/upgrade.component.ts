@@ -20,6 +20,7 @@ export class UpgradeComponent {
   totMoney!: number;
   enoughtM = false;
   clickUpg="";
+  couleur = "orange";
 
   affSeuil = "";
   valeur = "";
@@ -48,7 +49,12 @@ export class UpgradeComponent {
       this.affSeuil = this.affSeuil.substring(0,this.affSeuil.length-3*truc)+"."+this.affSeuil.substring(this.affSeuil.length-3*(truc),this.affSeuil.length-3*(truc-1));
       // console.log("=> "+this.affSeuil);
     }
+    this.couleur = "orange";
     // console.log(this.upg);
+    if (value.angel){
+      this.couleur = "violet";
+    }
+    // console.log(this.couleur);
   }
 
 

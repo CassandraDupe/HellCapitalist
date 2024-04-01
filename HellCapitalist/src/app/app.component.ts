@@ -77,8 +77,36 @@ export class AppComponent {
     }
   }
 
+  affichTotDemons(){
+    this.affTotDemons = ""+this.world.activeangels;
+    this.valeurTotDemons = "";
+
+    if(this.world.activeangels > 1000000){
+      let truc = Math.floor(Math.log(this.world.activeangels) / Math.log(1000));
+      this.valeurTotDemons = this.Illions[truc];
+      this.affTotDemons = this.affTotDemons.substring(0,this.affTotDemons.length-3*truc)+"."+this.affTotDemons.substring(this.affTotDemons.length-3*(truc),this.affTotDemons.length-3*(truc-1));
+    }
+  }
+
+  affichScore(){
+    let score = Math.floor((150 * ((this.world.score/(10**15))**0.5)) - this.world.activeangels); // C'est pas vraiment le score plutôt le nombre d'ange en plus 
+
+    this.affScore = ""+score;
+    this.valeurScore = "";
+
+    if(score > 1000000){
+      let truc = Math.floor(Math.log(score) / Math.log(1000));
+      this.valeurScore = this.Illions[truc];
+      this.affScore = this.affScore.substring(0,this.affScore.length-3*truc)+"."+this.affScore.substring(this.affScore.length-3*(truc),this.affScore.length-3*(truc-1));
+    }
+  }
+
   onProductionDone(event: any){
-    this.world.money = this.world.money + (event.prod.revenu * event.prod.quantite * event.n);
+    this.world.score += event.prod.revenu * event.prod.quantite * event.n * (1 + (this.world.activeangels*this.world.angelbonus)/100);
+
+    this.affichScore();
+
+    this.world.money += event.prod.revenu * event.prod.quantite * event.n * (1 + (this.world.activeangels*this.world.angelbonus)/100);
     
     this.affichMoney();
   }
@@ -198,12 +226,66 @@ export class AppComponent {
     );*/
   }
 
+  onBuyDem(upg: Palier){ // On est obligé de faire une nouvelle fonction (de ne pas réutiliser onBuyUpg) car on risque de confondre les AllUpgrades d'anges et d'argent
+    this.world.activeangels = this.world.activeangels - upg.seuil;
+
+    this.world.angelupgrades.forEach(worldUpg => {
+      if(!worldUpg.unlocked && (worldUpg.name == upg.name) && (worldUpg.idcible == upg.idcible)){ // On doit faire plein de vérification car les upgrades n'ont pas d'ID unique :(
+        worldUpg.unlocked = true;
+      }
+    });
+
+    if (upg.idcible > 0){ // Normalement ça sert à rien mais le laisse au cas où
+      if (upg.typeratio == "gain"){
+        this.world.products[upg.idcible-1].revenu *= upg.ratio;
+      }
+      if (upg.typeratio == "vitesse"){
+        this.world.products[upg.idcible-1].revenu /= upg.ratio;
+      }
+    }
+    else if (upg.idcible == 0) {
+      this.world.products.forEach(prod => {
+        if (upg.typeratio == "gain"){
+          prod.revenu *= upg.ratio;
+        }
+        if (upg.typeratio == "vitesse"){
+          prod.revenu /= upg.ratio;
+        }
+      });
+    }
+    else if (upg.idcible == -1) {
+      this.world.angelbonus += upg.ratio;
+    }
+    
+    this.affichTotDemons();
+
+    // ENLEVER LE COMMENTAIRE !!!
+    /*this.service.angeler(upg).catch(reason =>
+      console.log("erreur: " + reason)
+    );*/
+  }
+
+  reset (){
+    /*this.service.reset().catch(reason =>
+      console.log("erreur: " + reason)
+    );*/
+    location.reload();
+  }
+
   api = '';
   world: World = new World();
 
+  Illions = ["","","Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion", "Trigintillion", "Quadragintillion", "Quinquagintillion", "Sexagintillion", "Septuagintillion", "Octogintillion", "Nonagintillion", "Centillion", "Ducentillion", "Trucentillion", "Quadringentillion", "Quingentillion", "Sescentillion", "Septingentillion", "Octingentillion", "Nongentillion"];
+
   affMoney: string | undefined;
   valeur: string | undefined;
-  Illions = ["","","Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion", "Trigintillion", "Quadragintillion", "Quinquagintillion", "Sexagintillion", "Septuagintillion", "Octogintillion", "Nonagintillion", "Centillion", "Ducentillion", "Trucentillion", "Quadringentillion", "Quingentillion", "Sescentillion", "Septingentillion", "Octingentillion", "Nongentillion"];
+
+  affTotDemons: string | undefined;
+  valeurTotDemons: string | undefined;
+
+  affScore: string | undefined;
+  valeurScore: string | undefined;
+
 
   username = localStorage.getItem("username") || "";
 
@@ -220,19 +302,23 @@ export class AppComponent {
         this.world = world.data.getWorld;
         // console.log(this.world.money);
         this.affichMoney();
+        this.affichScore();
+        this.affichTotDemons();
       }
     );*/
 
     this.world = this.getWorldOffLine();
     this.affichMoney();
+    this.affichScore();
+    this.affichTotDemons();
   }
 
   getWorldOffLine () {
     return {"name": "A Nice World 2",
     "logo": "../assets/satan.png",
-    "money": 1000000,
-    "score": 2,
-    "totalangels": 0,
+    "money": 100,
+    "score": 100,
+    "totalangels": 1000000,
     "activeangels": 0,
     "angelbonus": 2,
     "lastupdate": "1706377728243",
@@ -707,7 +793,7 @@ export class AppComponent {
     "angelupgrades": [
       {
         "name": "Angel Sacrifice",
-        "logo": "icones/Demon.png",
+        "logo": "../assets/Demon.png",
         "seuil": 10,
         "idcible": 0,
         "ratio": 3,
@@ -716,7 +802,7 @@ export class AppComponent {
       },
       {
         "name": "Angelic Mutiny",
-        "logo": "icones/Demon.png",
+        "logo": "../assets/Demon.png",
         "seuil": 100000,
         "idcible": -1,
         "ratio": 2,
@@ -725,7 +811,7 @@ export class AppComponent {
       },
       {
         "name": "Angelic Rebellion",
-        "logo": "icones/Demon.png",
+        "logo": "../assets/Demon.png",
         "seuil": 100000000,
         "idcible": -1,
         "ratio": 2,
@@ -734,7 +820,7 @@ export class AppComponent {
       },
       {
         "name": "Angelic Selection",
-        "logo": "icones/Demon.png",
+        "logo": "../assets/Demon.png",
         "seuil": 1000000000,
         "idcible": 0,
         "ratio": 5,

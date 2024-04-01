@@ -2,8 +2,13 @@ table {
     display: block;
     width: 84%;
     position: relative; left: 8%;
-    background-color: rgb(236, 228, 217);
     margin-top: 3vh; margin-bottom: 3vh;
+}
+table.violet {
+    background-color: rgb(234, 231, 240);
+}
+table.orange {
+    background-color: rgb(236, 228, 217);
 }
 
 .upgIMG img {
@@ -23,7 +28,12 @@ td{
 
 .upgName {
     font-size: 3vw;
+}
+.upgName.orange {
     color: rgb(222, 136, 75);
+}
+.upgName.violet {
+    color: rgb(153, 134, 179);
 }
 
 .upgRun {
@@ -42,7 +52,14 @@ td{
 }
 .upgBuy button{
     height: 100%; width: 100%;
-    font-size: 3vw; color: rgb(247, 235, 223);
+    font-size: 3vw;
+}
+.upgBuy button.violet{
+    color: rgb(243, 236, 229);
+    background-color: rgb(195, 152, 180); border-color: rgb(79, 58, 71);
+}
+.upgBuy button.orange{
+    color: rgb(247, 235, 223);
     background-color: rgb(222, 136, 75); border-color: rgb(168, 83, 31);
 }
 
@@ -50,6 +67,10 @@ td{
     cursor: pointer;
 }
 
-.upgBuy button.clickable:hover{
+.upgBuy button.clickable.orange:hover{
     background-color: rgb(193, 120, 67);
+}
+
+.upgBuy button.clickable.violet:hover{
+    background-color: rgb(141, 111, 130);
 }
