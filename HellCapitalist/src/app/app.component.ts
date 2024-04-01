@@ -707,7 +707,7 @@ export class AppComponent {
     "angelupgrades": [
       {
         "name": "Angel Sacrifice",
-        "logo": "icones/angel.png",
+        "logo": "icones/Demon.png",
         "seuil": 10,
         "idcible": 0,
         "ratio": 3,
@@ -716,7 +716,7 @@ export class AppComponent {
       },
       {
         "name": "Angelic Mutiny",
-        "logo": "icones/angel.png",
+        "logo": "icones/Demon.png",
         "seuil": 100000,
         "idcible": -1,
         "ratio": 2,
@@ -725,7 +725,7 @@ export class AppComponent {
       },
       {
         "name": "Angelic Rebellion",
-        "logo": "icones/angel.png",
+        "logo": "icones/Demon.png",
         "seuil": 100000000,
         "idcible": -1,
         "ratio": 2,
@@ -734,7 +734,7 @@ export class AppComponent {
       },
       {
         "name": "Angelic Selection",
-        "logo": "icones/angel.png",
+        "logo": "icones/Demon.png",
         "seuil": 1000000000,
         "idcible": 0,
         "ratio": 5,

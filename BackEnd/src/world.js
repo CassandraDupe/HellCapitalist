@@ -226,7 +226,7 @@ module.exports = {
     "angelupgrades": [
         {
             "name": "Angel Sacrifice",
-            "logo": "../icones/Angel.png",
+            "logo": "../icones/Demon.png",
             "seuil": 10,
             "idcible": 0,
             "ratio": 3,
