@@ -1,0 +1,41 @@
+<table [class]="couleur">
+    <tbody>
+        <tr>
+            <td [class]="'upgIMG '+couleur" rowspan="3">
+                <img [src]="api + upg.logo" [alt]="upg.name"/>
+            </td>
+            <td [class]="'upgName '+couleur">
+                {{ upg.name }}
+            </td>
+            <td rowspan="3" [class]="'upgBuy '+couleur">
+                <button [class]="clickUpg + ' ' + couleur" name="buy" (click)="buy()">Buy!</button>
+            </td>
+        </tr>
+        @if(upg.idcible > 0) { <!-- il ne s'agit pas d'un allUpgrade -->
+            <tr>
+                <td [class]="'upgRun '+couleur">
+                    {{ prods[upg.idcible - 1].name + " " + upg.typeratio.toUpperCase() + " x" + upg.ratio }}
+                </td>
+            </tr>
+        }
+        @else if (upg.idcible == 0) { <!-- il s'agit d'un allUpgrade -->
+            <tr>
+                <td [class]="'upgRun '+couleur">
+                    {{ "All Products " + upg.typeratio.toUpperCase() + " x" + upg.ratio }}
+                </td>
+            </tr>
+        }
+        @else if (upg.idcible == -1) { <!-- il s'agit d'un angelUpgrade -->
+            <tr>
+                <td [class]="'upgRun '+couleur">
+                    {{ "Angel Effectiveness + " + upg.ratio + "%" }}
+                </td>
+            </tr>
+        }
+        <tr>
+            <td [class]="'upgCout '+couleur">
+                {{ affSeuil + " " + valeur }}
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -4,22 +4,23 @@ import { Palier } from '../class/World';
 import { Product } from '../class/World';
 
 @Component({
-  selector: 'manager',
+  selector: 'upgrade',
   standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './manager.component.html',
-  styleUrl: './manager.component.css'
+  templateUrl: './upgrade.component.html',
+  styleUrl: './upgrade.component.css'
 })
-export class ManagerComponent {
+export class UpgradeComponent {
   @Output() onBuy: EventEmitter<Palier> = new EventEmitter<Palier>();
 
   api = '';
-  man = new Palier;
+  upg = new Palier;
   affCout = "";
   prods = [new Product];
   totMoney!: number;
   enoughtM = false;
-  clickMan="";
+  clickUpg="";
+  couleur = "orange";
 
   affSeuil = "";
   valeur = "";
@@ -28,19 +29,19 @@ export class ManagerComponent {
   @Input()
   set params(value: any) {
     this.api = value.api;
-    this.man = value.manager;
+    this.upg = value.upgrade;
     this.prods = value.products;
     this.totMoney = value.money!;
-    this.clickMan="";
-    if(this.totMoney>=this.man.seuil){
+    this.clickUpg="";
+    if(this.totMoney>=this.upg.seuil){
       this.enoughtM = true;
-      this.clickMan="clickable";
+      this.clickUpg="clickable";
     }
-    this.affSeuil = ""+this.man.seuil;
+    this.affSeuil = ""+this.upg.seuil;
     this.valeur = "";
-    if(this.man.seuil > 1000000){
+    if(this.upg.seuil > 1000000){
       this.affSeuil = this.affSeuil.split(".",2)[0];
-      let truc = Math.floor(Math.log(this.man.seuil) / Math.log(1000));
+      let truc = Math.floor(Math.log(this.upg.seuil) / Math.log(1000));
       this.valeur = this.Illions[truc];
       // console.log("############################");
       // console.log(this.affSeuil);
@@ -48,12 +49,18 @@ export class ManagerComponent {
       this.affSeuil = this.affSeuil.substring(0,this.affSeuil.length-3*truc)+"."+this.affSeuil.substring(this.affSeuil.length-3*(truc),this.affSeuil.length-3*(truc-1));
       // console.log("=> "+this.affSeuil);
     }
+    this.couleur = "orange";
+    // console.log(this.upg);
+    if (value.angel){
+      this.couleur = "violet";
+    }
+    // console.log(this.couleur);
   }
 
 
   buy(){
     if(this.enoughtM){
-      this.onBuy.emit(this.man);
+      this.onBuy.emit(this.upg);
     }
   }
 }

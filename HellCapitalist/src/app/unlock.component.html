@@ -16,7 +16,14 @@
         @if(unl.idcible!=0){ <!-- il ne s'agit pas d'un allUnlock -->
             <tr>
                 <td class="unlRun">
-                    {{ prodName + " " + unl.typeratio + " " + "x" + unl.ratio }}
+                    {{ prodName + " " + unl.typeratio.toUpperCase() + " " + "x" + unl.ratio }}
+                </td>
+            </tr>
+        }
+        @else {
+            <tr>
+                <td class="unlRun">
+                    {{ "All Products " + unl.typeratio.toUpperCase() + " " + "x" + unl.ratio }}
                 </td>
             </tr>
         }

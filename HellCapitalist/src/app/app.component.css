@@ -126,6 +126,12 @@ button#close {
 
 .pages h5 {
     font-size: 2vw;
+    width: 90%; left: 5%;
+}
+
+.pages p {
+    font-size: 1.2vw;
+    width: 90%; left: 5%;
 }
 
 /* PAGE UNLOCKS*/
@@ -144,6 +150,7 @@ button#close {
 :not(.pages).unl {
     position: relative; bottom: 10vh;
 }
+
 /* PAGE UPGRADES*/
 .pages.upg {
     background-color: rgb(222, 196, 181);
@@ -176,4 +183,71 @@ button#close {
 
 :not(.pages).man {
     position: relative; bottom: 10vh;
+}
+
+/* PAGE INVESTORS*/
+.pages.inv {
+    background-color: rgb(207, 201, 203);
+}
+
+.pages h2.inv{
+    background-color: rgb(153, 134, 179);
+}
+
+.pages h5.inv{
+    color: rgb(118, 98, 155);
+}
+
+:not(.pages).inv {
+    position: relative; bottom: 10vh;
+}
+
+table.inv {
+    width: 100%;
+}
+
+table.inv div {
+    margin-left: auto; margin-right: auto;
+    width: 25vw; height: 15vh;
+    background-color: rgb(234, 231, 240);
+    border-radius: 1vw;
+    font-size: 2vw;
+}
+
+/*table.inv div span{
+    position: relative; top:3vh;
+}*/
+
+table.inv div.totDemons {
+    background-color: white;
+}
+
+.invPinkText {
+    color: rgb(153, 134, 189);
+}
+
+.invBlackText {
+    color: rgb(74, 69, 66);
+}
+
+table.inv button {
+    margin-left: auto; margin-right: auto;
+    width: 25vw; height: 15vh;
+    background-color: rgb(195, 152, 180);
+    border-radius: 1vw;
+    border-style: solid; border-color: rgb(79, 58, 71);
+    color: rgb(243, 236, 229); font-size: 2vw;
+    cursor: pointer;
+}
+
+table.inv button:hover {
+    background-color: rgb(141, 111, 130);
+}
+
+#invLign {
+    position: relative; left: 5%;
+    background-color: rgb(118, 98, 155);
+    width: 90%; height: 5px;
+    border-radius: 10vw;
+    margin-top: 17px; margin-bottom: 10px;
 }

@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { ProduitComponent } from './produit.component';
 import { ManagerComponent } from './manager.component';
 import { UnlockComponent } from './unlock.component';
+import { UpgradeComponent } from './upgrade.component';
 import { WebService } from '../car/webservice.service';
 import { World, Product, Palier } from '../class/World';
 import { bigvalue } from '../class/bigvalue.pipe';
@@ -13,7 +14,7 @@ import { FormsModule } from '@angular/forms';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, ProduitComponent, ManagerComponent, UnlockComponent, bigvalue, FormsModule]
+    imports: [RouterOutlet, ProduitComponent, ManagerComponent, UnlockComponent, UpgradeComponent, bigvalue, FormsModule]
 })
 export class AppComponent {
   title = "HellCapitalist"
@@ -65,22 +66,109 @@ export class AppComponent {
     this.affMoney = ""+this.world.money;
     this.valeur = "";
     if(this.world.money>=1000000){
+      this.affMoney = this.affMoney.split(".",2)[0];
       let truc = Math.floor(Math.log(this.world.money) / Math.log(1000));
       this.valeur = this.Illions[truc];
+      // console.log("############################");
+      // console.log(this.affMoney);
+      // console.log("0 à "+(this.affMoney.length-3*truc)+"."+(this.affMoney.length-3*(truc))+" à "+(this.affMoney.length-3*(truc-1)));
       this.affMoney = this.affMoney.substring(0,this.affMoney.length-3*truc)+"."+this.affMoney.substring(this.affMoney.length-3*(truc),this.affMoney.length-3*(truc-1));
+      // console.log("=> "+this.affMoney);
+    }
+  }
+
+  affichTotDemons(){
+    this.affTotDemons = ""+this.world.activeangels;
+    this.valeurTotDemons = "";
+
+    if(this.world.activeangels > 1000000){
+      let truc = Math.floor(Math.log(this.world.activeangels) / Math.log(1000));
+      this.valeurTotDemons = this.Illions[truc];
+      this.affTotDemons = this.affTotDemons.substring(0,this.affTotDemons.length-3*truc)+"."+this.affTotDemons.substring(this.affTotDemons.length-3*(truc),this.affTotDemons.length-3*(truc-1));
+    }
+  }
+
+  affichScore(){
+    let score = Math.floor((150 * ((this.world.score/(10**15))**0.5)) - this.world.activeangels); // C'est pas vraiment le score plutôt le nombre d'ange en plus 
+
+    this.affScore = ""+score;
+    this.valeurScore = "";
+
+    if(score > 1000000){
+      let truc = Math.floor(Math.log(score) / Math.log(1000));
+      this.valeurScore = this.Illions[truc];
+      this.affScore = this.affScore.substring(0,this.affScore.length-3*truc)+"."+this.affScore.substring(this.affScore.length-3*(truc),this.affScore.length-3*(truc-1));
     }
   }
 
   onProductionDone(event: any){
-    this.world.money = this.world.money + (event.prod.revenu * event.prod.quantite * event.n);
+    this.world.score += event.prod.revenu * event.prod.quantite * event.n * (1 + (this.world.activeangels*this.world.angelbonus)/100);
+
+    this.affichScore();
+
+    this.world.money += event.prod.revenu * event.prod.quantite * event.n * (1 + (this.world.activeangels*this.world.angelbonus)/100);
     
     this.affichMoney();
   }
 
-  onBuyProd(n: number){
-    this.world.money = this.world.money - n;
+  onBuyProd(event: any){
+    let updatedProduct = {...this.world.products[event.prod.id-1]};
+
+    updatedProduct.quantite += event.nbBuy;
+    updatedProduct.cout = updatedProduct.cout * Math.pow(updatedProduct.croissance,event.nbBuy);
     
+    updatedProduct.paliers.forEach(pal => {
+      if(!pal.unlocked && (updatedProduct.quantite >= pal.seuil)){
+        pal.unlocked = true;
+        if(pal.typeratio == "gain"){
+          updatedProduct.revenu = updatedProduct.revenu * pal.ratio;
+        }
+        if(pal.typeratio == "vitesse"){
+          updatedProduct.vitesse = updatedProduct.vitesse / pal.ratio;
+        }
+      }
+    });
+
+    // console.log(updatedProduct);
+
+    this.world.products[event.prod.id-1] = updatedProduct;
+
+    // Maintenant on vérifie pour les allUnlocks
+    let nbTotProd = 0;
+    this.world.products.forEach(prod => {
+      nbTotProd += prod.quantite;
+    });
+
+    this.world.allunlocks.forEach(pal => {
+      if(!pal.unlocked && (nbTotProd >= pal.seuil)){
+        pal.unlocked = true;
+        if(pal.typeratio == "gain"){
+          this.world.products.forEach(prod => {
+            // Pas besoin de remplacer le produit complet, ça marche comme ça (en faisant moins de calculs)
+            /*updatedProduct = {...prod};
+            updatedProduct.revenu = updatedProduct.revenu * pal.ratio;
+            this.world.products[updatedProduct.id-1] = updatedProduct;*/
+            prod.revenu = prod.revenu * pal.ratio;
+          });
+        }
+        if(pal.typeratio == "vitesse"){
+          this.world.products.forEach(prod => {
+            /*updatedProduct = {...prod};
+            updatedProduct.vitesse = updatedProduct.vitesse / pal.ratio;
+            this.world.products[updatedProduct.id-1] = updatedProduct;*/
+            prod.vitesse = prod.vitesse / pal.ratio;
+          });
+        }
+      }
+    });
+
+    this.world.money = this.world.money - (event.cout);
     this.affichMoney();
+
+    // ENLEVER LE COMMENTAIRE !!!
+    /*this.service.acheterQt(event.prod, event.nbBuy).catch(reason =>
+      console.log("erreur: " + reason)
+    );*/
   }
 
   // badgeManagers = 0; // Ne marche pas
@@ -95,14 +183,109 @@ export class AppComponent {
     this.world.products[man.idcible-1] = updatedProduct;
     
     this.affichMoney();
+
+    // ENLEVER LE COMMENTAIRE !!!
+    /*this.service.engager(man).catch(reason =>
+      console.log("erreur: " + reason)
+    );*/
+  }
+
+  onBuyUpg(upg: Palier){
+    this.world.money = this.world.money - upg.seuil;
+
+    this.world.upgrades.forEach(worldUpg => {
+      if(!worldUpg.unlocked && (worldUpg.name == upg.name) && (worldUpg.idcible == upg.idcible)){ // On doit faire plein de vérification car les upgrades n'ont pas d'ID unique :(
+        worldUpg.unlocked = true;
+      }
+    });
+
+    if (upg.idcible != 0){
+      if (upg.typeratio == "gain"){
+        this.world.products[upg.idcible-1].revenu *= upg.ratio;
+      }
+      if (upg.typeratio == "vitesse"){
+        this.world.products[upg.idcible-1].revenu /= upg.ratio;
+      }
+    }
+    else {
+      this.world.products.forEach(prod => {
+        if (upg.typeratio == "gain"){
+          prod.revenu *= upg.ratio;
+        }
+        if (upg.typeratio == "vitesse"){
+          prod.revenu /= upg.ratio;
+        }
+      });
+    }
+    
+    this.affichMoney();
+
+    // ENLEVER LE COMMENTAIRE !!!
+    /*this.service.upgrader(upg).catch(reason =>
+      console.log("erreur: " + reason)
+    );*/
+  }
+
+  onBuyDem(upg: Palier){ // On est obligé de faire une nouvelle fonction (de ne pas réutiliser onBuyUpg) car on risque de confondre les AllUpgrades d'anges et d'argent
+    this.world.activeangels = this.world.activeangels - upg.seuil;
+
+    this.world.angelupgrades.forEach(worldUpg => {
+      if(!worldUpg.unlocked && (worldUpg.name == upg.name) && (worldUpg.idcible == upg.idcible)){ // On doit faire plein de vérification car les upgrades n'ont pas d'ID unique :(
+        worldUpg.unlocked = true;
+      }
+    });
+
+    if (upg.idcible > 0){ // Normalement ça sert à rien mais le laisse au cas où
+      if (upg.typeratio == "gain"){
+        this.world.products[upg.idcible-1].revenu *= upg.ratio;
+      }
+      if (upg.typeratio == "vitesse"){
+        this.world.products[upg.idcible-1].revenu /= upg.ratio;
+      }
+    }
+    else if (upg.idcible == 0) {
+      this.world.products.forEach(prod => {
+        if (upg.typeratio == "gain"){
+          prod.revenu *= upg.ratio;
+        }
+        if (upg.typeratio == "vitesse"){
+          prod.revenu /= upg.ratio;
+        }
+      });
+    }
+    else if (upg.idcible == -1) {
+      this.world.angelbonus += upg.ratio;
+    }
+    
+    this.affichTotDemons();
+
+    // ENLEVER LE COMMENTAIRE !!!
+    /*this.service.angeler(upg).catch(reason =>
+      console.log("erreur: " + reason)
+    );*/
+  }
+
+  reset (){
+    /*this.service.reset().catch(reason =>
+      console.log("erreur: " + reason)
+    );*/
+    location.reload();
   }
 
   api = '';
   world: World = new World();
 
+  Illions = ["","","Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion", "Trigintillion", "Quadragintillion", "Quinquagintillion", "Sexagintillion", "Septuagintillion", "Octogintillion", "Nonagintillion", "Centillion", "Ducentillion", "Trucentillion", "Quadringentillion", "Quingentillion", "Sescentillion", "Septingentillion", "Octingentillion", "Nongentillion"];
+
   affMoney: string | undefined;
   valeur: string | undefined;
-  Illions = ["","","Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion", "Trigintillion", "Quadragintillion", "Quinquagintillion", "Sexagintillion", "Septuagintillion", "Octogintillion", "Nonagintillion", "Centillion", "Ducentillion", "Trucentillion", "Quadringentillion", "Quingentillion", "Sescentillion", "Septingentillion", "Octingentillion", "Nongentillion"]
+
+  affTotDemons: string | undefined;
+  valeurTotDemons: string | undefined;
+
+  affScore: string | undefined;
+  valeurScore: string | undefined;
+
 
   username = localStorage.getItem("username") || "";
 
@@ -119,19 +302,23 @@ export class AppComponent {
         this.world = world.data.getWorld;
         // console.log(this.world.money);
         this.affichMoney();
+        this.affichScore();
+        this.affichTotDemons();
       }
     );*/
 
     this.world = this.getWorldOffLine();
     this.affichMoney();
+    this.affichScore();
+    this.affichTotDemons();
   }
 
   getWorldOffLine () {
     return {"name": "A Nice World 2",
     "logo": "../assets/satan.png",
-    "money": 1000000,
-    "score": 2,
-    "totalangels": 0,
+    "money": 100,
+    "score": 100,
+    "totalangels": 1000000,
     "activeangels": 0,
     "angelbonus": 2,
     "lastupdate": "1706377728243",
@@ -478,7 +665,7 @@ export class AppComponent {
     "upgrades": [
       {
         "name": "Do you like paper bag ?",
-        "logo": "icones/sacpapier.jpg",
+        "logo": "../assets/lava.png",
         "seuil": 1000,
         "idcible": 1,
         "ratio": 3,
@@ -487,7 +674,7 @@ export class AppComponent {
       },
       {
         "name": "This is my bin",
-        "logo": "icones/recyclage.jpg",
+        "logo": "../assets/dog_toys.png",
         "seuil": 15000,
         "idcible": 2,
         "ratio": 3,
@@ -496,7 +683,7 @@ export class AppComponent {
       },
       {
         "name": "A nice bicycle",
-        "logo": "icones/velo.jpg",
+        "logo": "../assets/scream_and_despair.png",
         "seuil": 15000,
         "idcible": 3,
         "ratio": 3,
@@ -505,7 +692,7 @@ export class AppComponent {
       },
       {
         "name": "I want this car !",
-        "logo": "icones/voitureelec.jpg",
+        "logo": "../assets/flesh_and_bone.png",
         "seuil": 100000,
         "idcible": 4,
         "ratio": 3,
@@ -514,7 +701,7 @@ export class AppComponent {
       },
       {
         "name": "Don't laugh ! Just buy ! ",
-        "logo": "icones/eolienne.jpg",
+        "logo": "../assets/torture_machine.png",
         "seuil": 200000,
         "idcible": 5,
         "ratio": 3,
@@ -523,7 +710,7 @@ export class AppComponent {
       },
       {
         "name": "A big advance",
-        "logo": "icones/solar.jpg",
+        "logo": "../assets/maths_lessons.png",
         "seuil": 3000000,
         "idcible": 6,
         "ratio": 3,
@@ -532,7 +719,7 @@ export class AppComponent {
       },
       {
         "name": "I want it all !",
-        "logo": "icones/all.jpg",
+        "logo": "../assets/satan.png",
         "seuil": 3500000,
         "idcible": 0,
         "ratio": 3,
@@ -541,7 +728,7 @@ export class AppComponent {
       },
       {
         "name": "Why do you look a my bag ?",
-        "logo": "icones/sacpapier.jpg",
+        "logo": "../assets/lava.png",
         "seuil": 4000000,
         "idcible": 1,
         "ratio": 3,
@@ -550,7 +737,7 @@ export class AppComponent {
       },
       {
         "name": "The same bin as my mum.",
-        "logo": "icones/recyclage.jpg",
+        "logo": "../assets/dog_toys.png",
         "seuil": 6000000,
         "idcible": 2,
         "ratio": 3,
@@ -559,7 +746,7 @@ export class AppComponent {
       },
       {
         "name": "My bicycle goes fast.",
-        "logo": "icones/velo.jpg",
+        "logo": "../assets/scream_and_despair.png",
         "seuil": 10000000,
         "idcible": 3,
         "ratio": 3,
@@ -568,7 +755,7 @@ export class AppComponent {
       },
       {
         "name": "No more oil",
-        "logo": "icones/voitureelec.jpg",
+        "logo": "../assets/flesh_and_bone.png",
         "seuil": 20000000,
         "idcible": 4,
         "ratio": 3,
@@ -577,7 +764,7 @@ export class AppComponent {
       },
       {
         "name": "It's blowing too fast!",
-        "logo": "icones/eolienne.jpg",
+        "logo": "../assets/torture_machine.png",
         "seuil": 50000000,
         "idcible": 5,
         "ratio": 3,
@@ -586,7 +773,7 @@ export class AppComponent {
       },
       {
         "name": "Clouds go away !",
-        "logo": "icones/solar.jpg",
+        "logo": "../assets/maths_lessons.png",
         "seuil": 100000000,
         "idcible": 6,
         "ratio": 3,
@@ -595,7 +782,7 @@ export class AppComponent {
       },
       {
         "name": "Bingo !",
-        "logo": "icones/all.jpg",
+        "logo": "../assets/satan.png",
         "seuil": 500000000,
         "idcible": 0,
         "ratio": 3,
@@ -606,7 +793,7 @@ export class AppComponent {
     "angelupgrades": [
       {
         "name": "Angel Sacrifice",
-        "logo": "icones/angel.png",
+        "logo": "../assets/Demon.png",
         "seuil": 10,
         "idcible": 0,
         "ratio": 3,
@@ -615,7 +802,7 @@ export class AppComponent {
       },
       {
         "name": "Angelic Mutiny",
-        "logo": "icones/angel.png",
+        "logo": "../assets/Demon.png",
         "seuil": 100000,
         "idcible": -1,
         "ratio": 2,
@@ -624,7 +811,7 @@ export class AppComponent {
       },
       {
         "name": "Angelic Rebellion",
-        "logo": "icones/angel.png",
+        "logo": "../assets/Demon.png",
         "seuil": 100000000,
         "idcible": -1,
         "ratio": 2,
@@ -633,7 +820,7 @@ export class AppComponent {
       },
       {
         "name": "Angelic Selection",
-        "logo": "icones/angel.png",
+        "logo": "../assets/Demon.png",
         "seuil": 1000000000,
         "idcible": 0,
         "ratio": 5,

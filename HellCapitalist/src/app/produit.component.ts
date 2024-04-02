@@ -15,7 +15,7 @@ import { WebService } from '../car/webservice.service';
 })
 export class ProduitComponent implements AfterViewInit {
   @Output() refresh: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onBuy: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onBuy: EventEmitter<any> = new EventEmitter<any>();
 
   product!: Product;
   seu: number | undefined; // Prochain seuil (undefined si il n'y a pas de prochain seuil)
@@ -49,8 +49,7 @@ export class ProduitComponent implements AfterViewInit {
     if(this.multiplicateur == "MAX"){
       this.achat = Math.floor(Math.log(1-((this.totMoney*(1-this.product.croissance))/this.product.cout)) / Math.log(this.product.croissance)); // calcMaxCanBuy
     }
-    this.cout = Math.floor(
-    this.product.cout*((1-Math.pow(this.product.croissance,this.achat))/(1-this.product.croissance)));
+    this.cout = Math.floor(this.product.cout*((1-Math.pow(this.product.croissance,this.achat))/(1-this.product.croissance)));
     this.affCout = ""+this.cout;
     this.valeur = "";
     if(this.cout>=1000000){
@@ -80,9 +79,11 @@ export class ProduitComponent implements AfterViewInit {
     if(this.enoughtQ){
       this.stateIMG = "clickable";
     }
-    if (this.product.timeleft != 0){
-      this.initialValue = this.product.vitesse-this.product.timeleft;
-      this.run = true;
+    if (!this.product.timeleft){
+      if (this.product.timeleft != 0){
+        this.initialValue = this.product.vitesse-this.product.timeleft;
+        this.run = true;
+      }
     }
   }
 
@@ -91,7 +92,7 @@ export class ProduitComponent implements AfterViewInit {
   lastUpdate = Date.now();
 
   startFabrication() {
-    if(this.enoughtQ && !this.run){
+    if(this.enoughtQ && !this.run && !this.product.managerUnlocked){
       // ENLEVER LE COMMENTAIRE !!!
       /*this.service.lancerProduction(this.product).catch(reason =>
         console.log("erreur: " + reason)
@@ -123,7 +124,7 @@ export class ProduitComponent implements AfterViewInit {
   run = false;
 
   calcScore (){
-    if(this.run){
+    if(this.run || this.product.managerUnlocked){
       let nProduit = 0;
       // Calcul du temps écoulé depuis la dernière mise à jour
       let elapsetime = Date.now() - this.lastUpdate;
@@ -156,15 +157,7 @@ export class ProduitComponent implements AfterViewInit {
 
   buy(){
     if(this.enoughtM){
-      // ENLEVER LE COMMENTAIRE !!!
-      /*this.service.acheterQt(this.product, this.achat).catch(reason =>
-        console.log("erreur: " + reason)
-        );*/
-      this.onBuy.emit(this.cout);
-      this.product.quantite = this.product.quantite + this.achat;
-      this.product.cout = this.product.cout * Math.pow(this.product.croissance,this.achat+1);
-      this.affichCout();
-      this.seu = this.product.paliers.find(elem => elem.unlocked == false)?.seuil;
+      this.onBuy.emit({"nbBuy" : this.achat, "prod" : this.product, "cout" : this.cout});
     }
   }
 }

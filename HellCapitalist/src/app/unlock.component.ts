@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Palier } from '../class/World';
-import { Product } from '../class/World';
-import { WebService } from '../car/webservice.service';
 
 @Component({
   selector: 'unlock',
@@ -16,15 +14,13 @@ export class UnlockComponent {
   unl = new Palier;
   prodName = "";
 
-  constructor (
-    private service: WebService
-  ) {}
-
-
   @Input()
   set params(value: any) {
     this.api = value.api;
     this.unl = value.unlock;
     this.prodName = value.prodName;
+    if(this.prodName == undefined) {
+      console.log(this.unl);
+    }
   }
 }
