@@ -247,7 +247,7 @@ module.exports = {
         {
             "name": "Shô Tucker",
             "logo": "../icones/Shô_Tucker.png",
-            "seuil": 10,
+            "seuil": 50,
             "idcible": 2,
             "ratio": 0,
             "typeratio": "gain",
@@ -256,7 +256,7 @@ module.exports = {
         {
             "name": "Pinhead",
             "logo": "../icones/Pinhead.png",
-            "seuil": 10,
+            "seuil": 80,
             "idcible": 3,
             "ratio": 0,
             "typeratio": "gain",
@@ -265,7 +265,7 @@ module.exports = {
         {
             "name": "Hannibal Lecter",
             "logo": "../icones/Hannibal_Lecter.png",
-            "seuil": 10,
+            "seuil": 200,
             "idcible": 4,
             "ratio": 0,
             "typeratio": "gain",
@@ -274,7 +274,7 @@ module.exports = {
         {
             "name": "John Kramer",
             "logo": "../icones/John_Kramer.png",
-            "seuil": 10,
+            "seuil": 500,
             "idcible": 5,
             "ratio": 0,
             "typeratio": "gain",
@@ -283,7 +283,7 @@ module.exports = {
         {
             "name": "Gwenael Araignie",
             "logo": "../icones/Gwenael_Araignie.png",
-            "seuil": 10,
+            "seuil": 750,
             "idcible": 6,
             "ratio": 0,
             "typeratio": "gain",
