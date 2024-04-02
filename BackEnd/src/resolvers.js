@@ -33,6 +33,20 @@ module.exports = {
                     product.quantite += args.quantite;
                     product.cout = product.cout * Math.pow(product.croissance, args.quantite);
                     context.world.money -= coutNProduits;
+                    // On vérifie que nous n'avons pas atteint un palier avec les derniers achats
+                    let paliers = product.paliers;
+                    for (let p of paliers){
+                        if (!p.unlocked){
+                            if (product.quantite >= p.seuil){
+                                p.unlocked = true;
+                                if (p.typeratio == "vitesse"){
+                                    product.vitesse = product.vitesse * p.ratio;
+                                } else {
+                                    product.revenu = product.revenu * p.ratio;
+                                }
+                            }
+                        }
+                    }
                     saveWorld(context)
                     return (product);
                 } else {
@@ -81,9 +95,25 @@ module.exports = {
             }
         },
 
-        // acheterCashUpgrade(parent, args, context, info) {
-        //     updateScore(context);
-        // }
+        acheterCashUpgrade(parent, args, context, info) {
+            updateScore(context);
+            let upgrade = context.world.upgrades.find(u => u.name === args.name);
+            if (upgrade.typeratio == "gain"){
+                if (context.world.money >= upgrade.seuil){
+                    upgrade.unlocked = true;
+                    context.world.money -= upgrade.seuil;
+                    let produit = context.world.products.find(p => p.id === upgrade.idcible);
+                    produit.revenu = produit.revenu * upgrade.ratio;
+                } else {
+                    throw new Error(
+                        `Vous n'avez pas assez d'argent pour acheter cet upgrade`)
+                }
+            } else {
+                throw new Error(
+                    `Il ne s'agit pas d'un upgrade de type Gain`)
+            }
+            return
+        }
     }
 }
 
