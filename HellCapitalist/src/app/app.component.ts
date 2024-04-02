@@ -51,12 +51,12 @@ export class AppComponent {
       localStorage.setItem("username", this.username);
       this.service.user = this.username;
       // ENLEVER LE COMMENTAIRE !!!
-      /*this.service.getWorld().then(
+      this.service.getWorld().then(
         world => {
           this.world = world.data.getWorld;
           this.affichMoney();
         }
-      );*/
+      );
 
       this.connecte = true;
     }
@@ -166,9 +166,9 @@ export class AppComponent {
     this.affichMoney();
 
     // ENLEVER LE COMMENTAIRE !!!
-    /*this.service.acheterQt(event.prod, event.nbBuy).catch(reason =>
+    this.service.acheterQt(event.prod, event.nbBuy).catch(reason =>
       console.log("erreur: " + reason)
-    );*/
+    );
   }
 
   // badgeManagers = 0; // Ne marche pas
@@ -185,9 +185,9 @@ export class AppComponent {
     this.affichMoney();
 
     // ENLEVER LE COMMENTAIRE !!!
-    /*this.service.engager(man).catch(reason =>
+    this.service.engager(man).catch(reason =>
       console.log("erreur: " + reason)
-    );*/
+    );
   }
 
   onBuyUpg(upg: Palier){
@@ -221,9 +221,9 @@ export class AppComponent {
     this.affichMoney();
 
     // ENLEVER LE COMMENTAIRE !!!
-    /*this.service.upgrader(upg).catch(reason =>
+    this.service.upgrader(upg).catch(reason =>
       console.log("erreur: " + reason)
-    );*/
+    );
   }
 
   onBuyDem(upg: Palier){ // On est obligé de faire une nouvelle fonction (de ne pas réutiliser onBuyUpg) car on risque de confondre les AllUpgrades d'anges et d'argent
@@ -260,15 +260,15 @@ export class AppComponent {
     this.affichTotDemons();
 
     // ENLEVER LE COMMENTAIRE !!!
-    /*this.service.angeler(upg).catch(reason =>
+    this.service.angeler(upg).catch(reason =>
       console.log("erreur: " + reason)
-    );*/
+    );
   }
 
   reset (){
-    /*this.service.reset().catch(reason =>
+    this.service.reset().catch(reason =>
       console.log("erreur: " + reason)
-    );*/
+    );
     location.reload();
   }
 
@@ -296,7 +296,7 @@ export class AppComponent {
     }
     this.service.user = this.username;
     // ENLEVER LE COMMENTAIRE !!!
-    /*this.api = service.api;
+    this.api = service.api;
     service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
@@ -305,23 +305,23 @@ export class AppComponent {
         this.affichScore();
         this.affichTotDemons();
       }
-    );*/
+    );
 
-    this.world = this.getWorldOffLine();
+    /*this.world = this.getWorldOffLine();
     this.affichMoney();
     this.affichScore();
-    this.affichTotDemons();
+    this.affichTotDemons();*/
   }
 
   getWorldOffLine () {
-    return {"name": "A Nice World 2",
+    return {"name": "Hell Capitalist",
     "logo": "../assets/satan.png",
-    "money": 100,
-    "score": 100,
-    "totalangels": 1000000,
+    "money": 0,
+    "score": 0,
+    "totalangels": 0,
     "activeangels": 0,
-    "angelbonus": 2,
-    "lastupdate": "1706377728243",
+    "angelbonus": 0,
+    "lastupdate": "0",
     "products": [
       {
         "id": 1,
@@ -336,7 +336,7 @@ export class AppComponent {
         "managerUnlocked": false,
         "paliers": [
           {
-            "name": "Paper is beautiful !",
+            "name": "Lava Unlock 1",
             "logo": "../assets/lava.png",
             "seuil": 20,
             "idcible": 1,
@@ -345,7 +345,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "Don't forget your paper bag  !",
+            "name": "Lava Unlock 2",
             "logo": "../assets/lava.png",
             "seuil": 75,
             "idcible": 1,
@@ -354,7 +354,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "Go Paper ! ",
+            "name": "Lava Unlock 3",
             "logo": "../assets/lava.png",
             "seuil": 300,
             "idcible": 1,
@@ -363,7 +363,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "Paper Crazy !",
+            "name": "Lava Unlock 4",
             "logo": "../assets/lava.png",
             "seuil": 500,
             "idcible": 1,
@@ -386,7 +386,7 @@ export class AppComponent {
         "managerUnlocked": false,
         "paliers": [
           {
-            "name": "Give me some good bins !",
+            "name": "Dog Toys Unlock 1",
             "logo": "../assets/dog_toys.png",
             "seuil": 20,
             "idcible": 2,
@@ -395,7 +395,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "My Trashcans are better than yours ! ",
+            "name": "Dog Toys Unlock 2",
             "logo": "../assets/dog_toys.png",
             "seuil": 75,
             "idcible": 2,
@@ -404,7 +404,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "Recycle or die ! ",
+            "name": "Dog Toys Unlock 3",
             "logo": "../assets/dog_toys.png",
             "seuil": 300,
             "idcible": 2,
@@ -413,7 +413,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "Bins are getting mad !",
+            "name": "Dog Toys Unlock 4",
             "logo": "../assets/dog_toys.png",
             "seuil": 500,
             "idcible": 2,
@@ -436,7 +436,7 @@ export class AppComponent {
         "managerUnlocked": false,
         "paliers": [
           {
-            "name": "More Bicycles !",
+            "name": "Screams and Despair Unlock 1",
             "logo": "../assets/scream_and_despair.png",
             "seuil": 20,
             "idcible": 3,
@@ -445,7 +445,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "More More Bicycles !",
+            "name": "Screams and Despair Unlock 2",
             "logo": "../assets/scream_and_despair.png",
             "seuil": 75,
             "idcible": 3,
@@ -454,7 +454,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "Bicycles will rule the world ! ",
+            "name": "Screams and Despair Unlock 3",
             "logo": "../assets/scream_and_despair.png",
             "seuil": 300,
             "idcible": 3,
@@ -463,7 +463,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "Bicycles, what else ?",
+            "name": "Screams and Despair Unlock 4",
             "logo": "../assets/scream_and_despair.png",
             "seuil": 500,
             "idcible": 3,
@@ -486,7 +486,7 @@ export class AppComponent {
         "managerUnlocked": false,
         "paliers": [
           {
-            "name": "These cars are wizzzzzz !",
+            "name": "Flesh and Bones Unlock 1",
             "logo": "../assets/flesh_and_bone.png",
             "seuil": 20,
             "idcible": 4,
@@ -495,7 +495,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "Dont't be afraid by my cars !",
+            "name": "Flesh and Bones Unlock 2",
             "logo": "../assets/flesh_and_bone.png",
             "seuil": 75,
             "idcible": 4,
@@ -504,7 +504,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "Electricity forever ! ",
+            "name": "Flesh and Bones Unlock 3",
             "logo": "../assets/flesh_and_bone.png",
             "seuil": 300,
             "idcible": 4,
@@ -513,7 +513,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "I like to drive !",
+            "name": "Flesh and Bones Unlock 4",
             "logo": "../assets/flesh_and_bone.png",
             "seuil": 500,
             "idcible": 4,
@@ -536,7 +536,7 @@ export class AppComponent {
         "managerUnlocked": false,
         "paliers": [
           {
-            "name": "I feel like the wind !",
+            "name": "Torture Machine Unlock 1",
             "logo": "../assets/torture_machine.png",
             "seuil": 20,
             "idcible": 5,
@@ -545,7 +545,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "Give me more wind !",
+            "name": "Torture Machine Unlock 2",
             "logo": "../assets/torture_machine.png",
             "seuil": 75,
             "idcible": 4,
@@ -554,7 +554,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "There is nothing like the wind ! ",
+            "name": "Torture Machine Unlock 3",
             "logo": "../assets/torture_machine.png",
             "seuil": 300,
             "idcible": 4,
@@ -563,7 +563,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "Ride the wild wind !",
+            "name": "Torture Machine Unlock 4",
             "logo": "../assets/torture_machine.png",
             "seuil": 500,
             "idcible": 4,
@@ -586,7 +586,7 @@ export class AppComponent {
         "managerUnlocked": false,
         "paliers": [
           {
-            "name": "Let's the sun shining ! ",
+            "name": "Maths Lessons unlock 1",
             "logo": "../assets/maths_lessons.png",
             "seuil": 20,
             "idcible": 6,
@@ -595,7 +595,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "I feel the power of the sun !",
+            "name": "Maths Lessons unlock 2",
             "logo": "../assets/maths_lessons.png",
             "seuil": 75,
             "idcible": 6,
@@ -604,7 +604,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "It's hot ! ",
+            "name": "Maths Lessons unlock 3",
             "logo": "../assets/maths_lessons.png",
             "seuil": 300,
             "idcible": 6,
@@ -613,7 +613,7 @@ export class AppComponent {
             "unlocked": false
           },
           {
-            "name": "Oh my god, we can't stop it !",
+            "name": "Maths Lessons unlock 4",
             "logo": "../assets/maths_lessons.png",
             "seuil": 500,
             "idcible": 6,
@@ -664,7 +664,7 @@ export class AppComponent {
     ],
     "upgrades": [
       {
-        "name": "Do you like paper bag ?",
+        "name": "Lava Upgrade 1",
         "logo": "../assets/lava.png",
         "seuil": 1000,
         "idcible": 1,
@@ -673,7 +673,7 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "This is my bin",
+        "name": "Dog Toys Upgrade 1",
         "logo": "../assets/dog_toys.png",
         "seuil": 15000,
         "idcible": 2,
@@ -682,7 +682,7 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "A nice bicycle",
+        "name": "Scream And Despair Upgrade 1",
         "logo": "../assets/scream_and_despair.png",
         "seuil": 15000,
         "idcible": 3,
@@ -691,7 +691,7 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "I want this car !",
+        "name": "Flesh And Bone Upgrade 1",
         "logo": "../assets/flesh_and_bone.png",
         "seuil": 100000,
         "idcible": 4,
@@ -700,7 +700,7 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "Don't laugh ! Just buy ! ",
+        "name": "Torture Machine Upgrade 1",
         "logo": "../assets/torture_machine.png",
         "seuil": 200000,
         "idcible": 5,
@@ -709,7 +709,7 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "A big advance",
+        "name": "Maths Lessons",
         "logo": "../assets/maths_lessons.png",
         "seuil": 3000000,
         "idcible": 6,
@@ -727,7 +727,7 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "Why do you look a my bag ?",
+        "name": "Lava Upgrade 2",
         "logo": "../assets/lava.png",
         "seuil": 4000000,
         "idcible": 1,
@@ -736,7 +736,7 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "The same bin as my mum.",
+        "name": "Dog Toys Upgrade 2",
         "logo": "../assets/dog_toys.png",
         "seuil": 6000000,
         "idcible": 2,
@@ -745,7 +745,7 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "My bicycle goes fast.",
+        "name": "Scream And Despair Upgrade 2",
         "logo": "../assets/scream_and_despair.png",
         "seuil": 10000000,
         "idcible": 3,
@@ -754,7 +754,7 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "No more oil",
+        "name": "Flesh And Bone Upgrade 2",
         "logo": "../assets/flesh_and_bone.png",
         "seuil": 20000000,
         "idcible": 4,
@@ -763,7 +763,7 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "It's blowing too fast!",
+        "name": "Torture Machine Update 2",
         "logo": "../assets/torture_machine.png",
         "seuil": 50000000,
         "idcible": 5,
@@ -772,7 +772,7 @@ export class AppComponent {
         "unlocked": false
       },
       {
-        "name": "Clouds go away !",
+        "name": "Maths Lessons Upgrade 2",
         "logo": "../assets/maths_lessons.png",
         "seuil": 100000000,
         "idcible": 6,

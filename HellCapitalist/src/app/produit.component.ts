@@ -79,7 +79,7 @@ export class ProduitComponent implements AfterViewInit {
     if(this.enoughtQ){
       this.stateIMG = "clickable";
     }
-    if (!this.product.timeleft){
+    if (!this.product.managerUnlocked){
       if (this.product.timeleft != 0){
         this.initialValue = this.product.vitesse-this.product.timeleft;
         this.run = true;
@@ -94,9 +94,9 @@ export class ProduitComponent implements AfterViewInit {
   startFabrication() {
     if(this.enoughtQ && !this.run && !this.product.managerUnlocked){
       // ENLEVER LE COMMENTAIRE !!!
-      /*this.service.lancerProduction(this.product).catch(reason =>
+      this.service.lancerProduction(this.product).catch(reason =>
         console.log("erreur: " + reason)
-        );*/
+        );
       this.product.timeleft = this.product.vitesse;
       this.lastUpdate = Date.now();
       this.run = true;
